@@ -1,0 +1,10 @@
+Module 1
+1. Car Data Entry Page - Vehicle details and owner details, preferred routes, other states yes/no, mileage city, mileage highway, capacity etc..
+2. Car Data Viewer Page with options to book a car - View the data entered. Vehicle number, model, capacity, owner, driver, contact details etc
+3. Car booking page - Cars selected, customer name, customer contact, address, pick up location, to destinations, rates fix/per km, per km rate, driver bhatta etc..
+4. Driver and Contacts information
+
+
+Billing module:
+1. Select car, enter customer details :::::: first_name, last_name, address, phone_number, age, id_proof, number of people travelling, travelling date, pick  up location, pick up time, 
+advance amount, from location, to location/s, total amount, balance amount

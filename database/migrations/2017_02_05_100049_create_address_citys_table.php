@@ -15,11 +15,11 @@ class CreateAddressCitysTable extends Migration
     {
         Schema::create('address_citys', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('name');
-			$table->integer('state_id');
+            $table->string('name');
+            $table->integer('state_id');
             $table->timestamps();
-			
-			$table->foreign('state_id')->references('id')->on('states');
+            
+            $table->foreign('state_id')->references('id')->on('states');
         });
     }
 

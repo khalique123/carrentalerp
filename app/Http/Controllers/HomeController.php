@@ -1,6 +1,6 @@
 <?php
 
-namespace Rental Cars\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 

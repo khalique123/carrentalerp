@@ -15,11 +15,11 @@ class CreateAddressTable extends Migration
     {
         Schema::create('address', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('address');
-			$table->integer('area_id');
+            $table->string('address');
+            $table->integer('area_id');
             $table->timestamps();
-			
-			$table->foreign('area_id')->references('id')->on('areas');
+            
+            $table->foreign('area_id')->references('id')->on('areas');
         });
     }
 

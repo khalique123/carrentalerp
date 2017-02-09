@@ -15,11 +15,11 @@ class CreateModelsTable extends Migration
     {
         Schema::create('models', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('name');
-			$table->string('manufacturer');
-			$table->string('brand');
-			$table->integer('country_id');
-			$table->boolean('is_active');
+            $table->string('name');
+            $table->string('manufacturer');
+            $table->string('brand');
+            $table->integer('country_id');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@
             "database"
         ],
         "psr-4": {
-            "Rental Cars\\": "app/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

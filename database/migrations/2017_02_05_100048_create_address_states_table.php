@@ -15,11 +15,11 @@ class CreateAddressStatesTable extends Migration
     {
         Schema::create('address_states', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('name');
-			$table->integer('country_id');
+            $table->string('name');
+            $table->integer('country_id');
             $table->timestamps();
-			
-			$table->foreign('country_id')->references('id')->on('countrys');
+            
+            $table->foreign('country_id')->references('id')->on('countrys');
         });
     }
 
