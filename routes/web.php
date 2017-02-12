@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/test', function() {
+
+    return view('test');
+});
 Route::get('/home', 'HomeController@index');
 
 /*
@@ -40,3 +44,7 @@ Route::put('vehicle/{id}', 'VehicleController@update')
 Route::delete('vehicle/{id}', 'VehicleController@destroy')
     ->where('id', '[0-9]+')
     ->name('vehicle_delete_route');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

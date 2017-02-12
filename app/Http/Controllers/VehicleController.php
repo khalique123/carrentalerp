@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Vehicle;
 
 class VehicleController extends Controller
 {
@@ -13,18 +14,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $vehicleInfo = DB::table('vehicles AS v')
-            ->join('vendor_vehicle AS vv', 'v.id', '=', 'vv.vehicle_id')
-            ->join('vendors AS ve', 've.id', '=', 'vv.owner_id')
-            ->join('models AS m', 'm.id', '=', 'v.model_id')
-            ->join('fuels AS f', 'f.id', '=', 'v.fuel_id')
-            ->join('address AS a1', 'a1.id', '=', 've.primary_address')
-            ->join('address AS a2', 'a2.id', '=', 've.secondary_address')
-            ->select('v.id, v.registration_number', 'v.registered_owner', 'v.color','ve.first_name', 've.last_name', 've.email'
-                    , 've.is_active','a1.phone_number AS primary_phone', 'a2.phone_number AS secondary_phone', 'm.name AS model_name'
-                    , 'm.manufacturer', 'm.brand', 'f.name AS fuel_type')
-            ->get()
-            ->paginate(15);
+        $vehicleInfo = App\Vehicle::where('is_active', '=', 1)->paginate(15);
             
         $vehicleInfo->withPath('vehicle/results');
             
@@ -66,28 +56,26 @@ class VehicleController extends Controller
         } else {
             // store
             $vehicle = new Vehicle;
-            $vehicle->model_id                 = Input::get('model_id');
-            $vehicle->registartion_number      = Input::get('reg_num');
-            $vehicle->registered_owner         = Input::get('reg_owner');
-            $vehicle->address                  = Input::get('address');
-            $vehicle->makers_class             = Input::get('makers_class');
-            $vehicle->manufacture_date         = Input::get('manufacture_date');
-            $vehicle->fuel_id                  = Input::get('fuel_id');
-            $vehicle->engine_number            = Input::get('engine_number');
+            $vehicle->reg_number               = Input::get('reg_number');
             $vehicle->chassis_number           = Input::get('chassis_number');
-            $vehicle->seating_capacity         = Input::get('seating_capacity');
+            $vehicle->engine_number            = Input::get('engine_number');
+            $vehicle->make                     = Input::get('make');
+            $vehicle->model                    = Input::get('model');
+            $vehicle->manu_year                = Input::get('manu_year');
             $vehicle->color                    = Input::get('color');
-            $vehicle->registration_date        = Input::get('registration_date');
-            $vehicle->registration_expiry_date = Input::get('registration_expiry_date');
-            $vehicle->kilometers_run           = Input::get('kilometers_run');
-            $vehicle->fuel_efficiency          = Input::get('fuel_efficiency');
-            $vehicle->interior_rating          = Input::get('interior_rating');
-            $vehicle->engine_rating            = Input::get('engine_rating');
-            $vehicle->tyres_rating             = Input::get('tyres_rating');
+            $vehicle->vehicle_class_id         = Input::get('vehicle_class_id');
+            $vehicle->weight                   = Input::get('weight');
+            $vehicle->transmission_id          = Input::get('transmission_id');
+            $vehicle->description              = Input::get('description');
+            $vehicle->fuel_id                  = Input::get('fuel_id');
+            $vehicle->availability_id          = Input::get('availability_id');
+            $vehicle->vehicle_location         = Input::get('vehicle_location');
+            $vehicle->branch_id                = Input::get('branch_id');
+            $vehicle->vehicle_status_id        = Input::get('vehicle_status_id');
             $vehicle->save();
             
             // redirect
-            Session::flash('message', 'Successfully Entered Vehicle Information for Registration Number '.$registartion_number.'.');
+            Session::flash('message', 'Successfully Entered Vehicle Information for Registration Number '.Input::get('reg_number').'.');
             return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info inserted successfully']);
         }
     }
@@ -112,18 +100,33 @@ class VehicleController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicleInfo = DB::table('vehicles AS v')
-                ->join('vendor_vehicle AS vv', 'v.id', '=', 'vv.vehicle_id')
-                ->join('vendors AS ve', 've.id', '=', 'vv.owner_id')
-                ->join('models AS m', 'm.id', '=', 'v.model_id')
-                ->join('fuels AS f', 'f.id', '=', 'v.fuel_id')
-                ->join('address AS a1', 'a1.id', '=', 've.primary_address')
-                ->join('address AS a2', 'a2.id', '=', 've.secondary_address')
-                ->select('v.id, v.registration_number', 'v.registered_owner', 'v.color','ve.first_name', 've.last_name', 've.email'
-                        , 've.is_active', 'a1.phone_number AS primary_phone', 'a2.phone_number AS secondary_phone', 'm.name AS model_name'
-                        , 'm.manufacturer', 'm.brand', 'f.name AS fuel_type')
-                ->where('v.id = $id')
-                ->first();
+            $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
+                
+            return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
+        }
+    }
+    
+    /**
+     * Display the specified vechicles available between the specified times.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'id'       => 'required|digits_between:0,1000000'
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator);
+        } else {
+            $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
                 
             return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
         }
@@ -149,18 +152,7 @@ class VehicleController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicleInfo = DB::table('vehicles AS v')
-                ->join('vendor_vehicle AS vv', 'v.id', '=', 'vv.vehicle_id')
-                ->join('vendors AS ve', 've.id', '=', 'vv.owner_id')
-                ->join('models AS m', 'm.id', '=', 'v.model_id')
-                ->join('fuels AS f', 'f.id', '=', 'v.fuel_id')
-                ->join('address AS a1', 'a1.id', '=', 've.primary_address')
-                ->join('address AS a2', 'a2.id', '=', 've.secondary_address')
-                ->select('v.registration_number', 'v.registered_owner', 'v.color','ve.first_name', 've.last_name', 've.email', 've.is_active'
-                        ,'a1.phone_number AS primary_phone', 'a2.phone_number AS secondary_phone', 'm.name AS model_name', 'm.manufacturer'
-                        ,'m.brand', 'f.name AS fuel_type')
-                ->where('v.id = $id')
-                ->first();
+            $vehicleInfo = $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
                                 
             return redirect()->route('vehicle_edit_route', ['vehicle_info' => $vehicleInfo]);
         }
@@ -188,39 +180,27 @@ class VehicleController extends Controller
                 ->withErrors($validator);
         } else {
             // store
-            $vehicle = App\Vehicle::where('vehicle_id', $id);
-            $vehicle->model_id                 = Input::get('model_id');
-            $vehicle->registartion_number      = Input::get('reg_num');
-            $vehicle->registered_owner         = Input::get('reg_owner');
-            $vehicle->address                  = Input::get('address');
-            $vehicle->makers_class             = Input::get('makers_class');
-            $vehicle->manufacture_date         = Input::get('manufacture_date');
-            $vehicle->fuel_id                  = Input::get('fuel_id');
-            $vehicle->engine_number            = Input::get('engine_number');
+            $vehicle = App\Vehicle::where('id', $id)->first();
+
+            $vehicle->reg_number               = Input::get('reg_number');
             $vehicle->chassis_number           = Input::get('chassis_number');
-            $vehicle->seating_capacity         = Input::get('seating_capacity');
+            $vehicle->engine_number            = Input::get('engine_number');
+            $vehicle->make                     = Input::get('make');
+            $vehicle->model                    = Input::get('model');
+            $vehicle->manu_year                = Input::get('manu_year');
             $vehicle->color                    = Input::get('color');
-            $vehicle->registration_date        = Input::get('registration_date');
-            $vehicle->registration_expiry_date = Input::get('registration_expiry_date');
-            $vehicle->kilometers_run           = Input::get('kilometers_run');
-            $vehicle->fuel_efficiency          = Input::get('fuel_efficiency');
-            $vehicle->interior_rating          = Input::get('interior_rating');
-            $vehicle->engine_rating            = Input::get('engine_rating');
-            $vehicle->tyres_rating             = Input::get('tyres_rating');
+            $vehicle->vehicle_class_id         = Input::get('vehicle_class_id');
+            $vehicle->weight                   = Input::get('weight');
+            $vehicle->transmission_id          = Input::get('transmission_id');
+            $vehicle->description              = Input::get('description');
+            $vehicle->fuel_id                  = Input::get('fuel_id');
+            $vehicle->availability_id          = Input::get('availability_id');
+            $vehicle->vehicle_location         = Input::get('vehicle_location');
+            $vehicle->branch_id                = Input::get('branch_id');
+            $vehicle->vehicle_status_id        = Input::get('vehicle_status_id');
             $vehicle->save();
                         
-            $vehicleInfo = DB::table('vehicles AS v')
-                ->join('vendor_vehicle AS vv', 'v.id', '=', 'vv.vehicle_id')
-                ->join('vendors AS ve', 've.id', '=', 'vv.owner_id')
-                ->join('models AS m', 'm.id', '=', 'v.model_id')
-                ->join('fuels AS f', 'f.id', '=', 'v.fuel_id')
-                ->join('address AS a1', 'a1.id', '=', 've.primary_address')
-                ->join('address AS a2', 'a2.id', '=', 've.secondary_address')
-                ->select('v.registration_number', 'v.registered_owner', 'v.color','ve.first_name', 've.last_name', 've.email', 've.is_active'
-                        ,'a1.phone_number AS primary_phone', 'a2.phone_number AS secondary_phone', 'm.name AS model_name', 'm.manufacturer'
-                        ,'m.brand', 'f.name AS fuel_type')
-                ->where('v.id = $id')
-                ->first();
+            $vehicleInfo = App\Vehicle::where('id', $id)->first();
                                 
             return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info updated successfully.']);
         }
@@ -246,7 +226,7 @@ class VehicleController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicle = App\Vehicle::where('vehicle_id', $id);
+            $vehicle = App\Vehicle::where('id', $id);
             $vehicle->delete();
             
             return redirect()->route('vehicle_list_route');
