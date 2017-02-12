@@ -21,4 +21,20 @@ class State extends Model
     {
         return $this->hasMany('App\Branch','state_id');
     }
+    
+    /**
+     * Get the bookings associated with a state
+     */
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking','state_id');
+    }
+    
+    /**
+     * Get the booking locations associated with a state
+     */
+    public function bookingLocations()
+    {
+        return $this->hasMany('App\BookingLocation','state_id');
+    }
 }

@@ -112,12 +112,13 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /*public function search($from, $to, $class, $location, $branch)
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id'       => 'required|digits_between:0,1000000'
+            'from'       => 'required',
+            'to'         => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -126,11 +127,11 @@ class VehicleController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
+            $vehicleInfo = App\Vehicle::where('id', '=', $id);
                 
             return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
         }
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
