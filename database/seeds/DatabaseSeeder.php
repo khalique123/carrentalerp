@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
         $environment = App::environment();
         
         //if condition for Development Environment Seeding
-        if(0 == strcasecmp('dev', $environment)) {
+        if(0 == strcasecmp('development', $environment)) {
             
         }
         //if condition for Production Environment Seeding
-        elseif(0 === strcasecmp('prod', $environment)) {
+        elseif(0 === strcasecmp('production', $environment)) {
             
         }
         //if condition for Test Environment Seeding
