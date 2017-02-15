@@ -15,11 +15,11 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $vehicleInfo = App\Vehicle::where('is_active', '=', 1)->paginate(15);
+        $vehicleInfo = Vehicle::paginate(15);
             
         $vehicleInfo->withPath('vehicle/results');
             
-        return redirect()->route('vehicle_list_route', ['vehicle_info' => $vehicleInfo]);
+        return view('/vehicle/listing', ['vehicle_info' => $vehicleInfo]);
     }
 
     /**
@@ -29,7 +29,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return redirect()->route('vehicle_create_route');
+        return view('/vehicle/create_vehicle');
     }
 
     /**
@@ -77,7 +77,7 @@ class VehicleController extends Controller
             
             // redirect
             Session::flash('message', 'Successfully Entered Vehicle Information for Registration Number '.Input::get('reg_number').'.');
-            return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info inserted successfully']);
+            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info inserted successfully']);
         }
     }
 
@@ -103,7 +103,7 @@ class VehicleController extends Controller
         } else {
             $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
                 
-            return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
+            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => '']);
         }
     }
     
@@ -156,7 +156,7 @@ class VehicleController extends Controller
         } else {
             $vehicleInfo = $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
                                 
-            return redirect()->route('vehicle_edit_route', ['vehicle_info' => $vehicleInfo]);
+            return view('edit_vehicle', ['vehicle_info' => $vehicleInfo]);
         }
     }
 
@@ -204,7 +204,7 @@ class VehicleController extends Controller
                         
             $vehicleInfo = App\Vehicle::where('id', $id)->first();
                                 
-            return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info updated successfully.']);
+            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info updated successfully.']);
         }
     }
 

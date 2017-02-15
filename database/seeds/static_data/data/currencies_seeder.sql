@@ -1,110 +1,111 @@
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (1, 'Afghanistan', 'AFN', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (2, 'Albania', 'ALL', 'Lek');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (10, 'Argentina', 'ARS', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (12, 'Aruba', 'AWG', 'ƒ');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (13, 'Australia', 'AUD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (15, 'Azerbaijan', 'AZN', '???');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (19, 'Barbados', 'BBD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (20, 'Belarus', 'BYR', 'p.');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (21, 'Belgium', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (24, 'Bermuda', 'BMD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (26, 'Bolivia', 'BOB', '$b');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (27, 'Bosnia and Herzegovina', 'BAM', 'KM');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (28, 'Botswana', 'BWP', 'P');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (30, 'Brazil', 'BRL', 'R$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (33, 'Bulgaria', 'BGN', '??');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (36, 'Cambodia', 'KHR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (38, 'Canada', 'CAD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (40, 'Cayman Islands', 'KYD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (43, 'Chile', 'CLP', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (44, 'China', 'CNY', '¥');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (47, 'Colombia', 'COP', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (52, 'Costa Rica', 'CRC', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (55, 'Cuba', 'CUP', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (56, 'Cyprus', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (57, 'Czech Republic', 'CZK', 'K?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (58, 'Denmark', 'DKK', 'kr');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (61, 'Dominican Republic', 'DOP ', 'RD$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (64, 'Egypt', 'EGP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (65, 'El Salvador', 'SVC', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (71, 'Falkland Islands', 'FKP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (75, 'France', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (83, 'Ghana', 'GHC', '¢');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (84, 'Gibraltar', 'GIP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (85, 'Greece', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (90, 'Guatemala', 'GTQ', 'Q');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (94, 'Guyana', 'GYD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (97, 'Honduras', 'HNL', 'L');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (99, 'Hungary', 'HUF', 'Ft');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (100, 'Iceland', 'ISK', 'kr');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (101, 'India', 'INR', 'Rp');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (102, 'Indonesia', 'IDR', 'Rp');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (103, 'Iran', 'IRR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (105, 'Ireland', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (106, 'Israel', 'ILS', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (107, 'Italy', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (108, 'Jamaica', 'JMD', 'J$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (109, 'Japan', 'JPY', '¥');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (110, 'Jersey', 'JEP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (112, 'Kazakhstan', 'KZT', '??');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (118, 'Kyrgyzstan', 'KGS', '??');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (119, 'Laos', 'LAK', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (120, 'Latvia', 'LVL', 'Ls');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (121, 'Lebanon', 'LBP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (123, 'Liberia', 'LRD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (125, 'Liechtenstein', 'CHF', 'CHF');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (126, 'Lithuania', 'LTL', 'Lt');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (127, 'Luxembourg', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (129, 'Macedonia', 'MKD', '???');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (132, 'Malaysia', 'MYR', 'RM');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (135, 'Malta', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (140, 'Mauritius', 'MUR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (142, 'Mexico', 'MXN', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (146, 'Mongolia', 'MNT', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (149, 'Mozambique', 'MZN', 'MT');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (151, 'Namibia', 'NAD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (153, 'Nepal', 'NPR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (154, 'Netherlands Antilles', 'ANG', 'ƒ');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (157, 'New Zealand', 'NZD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (158, 'Nicaragua', 'NIO', 'C$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (160, 'Nigeria', 'NGN', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (164, 'Norway', 'NOK', 'kr');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (165, 'Oman', 'OMR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (166, 'Pakistan', 'PKR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (169, 'Panama', 'PAB', 'B/.');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (171, 'Paraguay', 'PYG', 'Gs');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (172, 'Peru', 'PEN', 'S/.');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (173, 'Philippines', 'PHP', 'Php');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (175, 'Poland', 'PLN', 'z?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (178, 'Qatar', 'QAR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (180, 'Romania', 'RON', 'lei');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (181, 'Russia', 'RUB', '???');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (183, 'Saint Helena', 'SHP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (191, 'Saudi Arabia', 'SAR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (193, 'Serbia', 'RSD', '???.');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (194, 'Seychelles', 'SCR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (196, 'Singapore', 'SGD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (198, 'Slovenia', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (200, 'Solomon Islands', 'SBD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (201, 'Somalia', 'SOS', 'S');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (202, 'South Africa', 'ZAR', 'R');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (205, 'Spain', 'EUR', '€');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (206, 'Sri Lanka', 'LKR', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (208, 'Suriname', 'SRD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (211, 'Sweden', 'SEK', 'kr');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (212, 'Switzerland', 'CHF', 'CHF');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (213, 'Syria', 'SYP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (214, 'Taiwan', 'TWD', 'NT$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (217, 'Thailand', 'THB', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (221, 'Trinidad and Tobago', 'TTD', 'TT$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (223, 'Turkey', 'TRY', 'TL');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (223, 'Turkey', 'TRL', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (226, 'Tuvalu', 'TVD', '$');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (228, 'Ukraine', 'UAH', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (230, 'United Kingdom', 'GBP', '£');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (233, 'Uruguay', 'UYU', '$U');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (234, 'Uzbekistan', 'UZS', '??');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (237, 'Venezuela', 'VEF', 'Bs');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (238, 'Vietnam', 'VND', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (243, 'Yemen', 'YER', '?');
-INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES (246, 'Zimbabwe', 'ZWD', 'Z$');
+ INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES
+ (1, 'Afghanistan', 'AFN', '?'),
+ (2, 'Albania', 'ALL', 'Lek'),
+ (10, 'Argentina', 'ARS', '$'),
+ (12, 'Aruba', 'AWG', 'ƒ'),
+ (13, 'Australia', 'AUD', '$'),
+ (15, 'Azerbaijan', 'AZN', '???'),
+ (19, 'Barbados', 'BBD', '$'),
+ (20, 'Belarus', 'BYR', 'p.'),
+ (21, 'Belgium', 'EUR', '€'),
+ (24, 'Bermuda', 'BMD', '$'),
+ (26, 'Bolivia', 'BOB', '$b'),
+ (27, 'Bosnia and Herzegovina', 'BAM', 'KM'),
+ (28, 'Botswana', 'BWP', 'P'),
+ (30, 'Brazil', 'BRL', 'R$'),
+ (33, 'Bulgaria', 'BGN', '??'),
+ (36, 'Cambodia', 'KHR', '?'),
+ (38, 'Canada', 'CAD', '$'),
+ (40, 'Cayman Islands', 'KYD', '$'),
+ (43, 'Chile', 'CLP', '$'),
+ (44, 'China', 'CNY', '¥'),
+ (47, 'Colombia', 'COP', '$'),
+ (52, 'Costa Rica', 'CRC', '?'),
+ (55, 'Cuba', 'CUP', '?'),
+ (56, 'Cyprus', 'EUR', '€'),
+ (57, 'Czech Republic', 'CZK', 'K?'),
+ (58, 'Denmark', 'DKK', 'kr'),
+ (61, 'Dominican Republic', 'DOP ', 'RD$'),
+ (64, 'Egypt', 'EGP', '£'),
+ (65, 'El Salvador', 'SVC', '$'),
+ (71, 'Falkland Islands', 'FKP', '£'),
+ (75, 'France', 'EUR', '€'),
+ (83, 'Ghana', 'GHC', '¢'),
+ (84, 'Gibraltar', 'GIP', '£'),
+ (85, 'Greece', 'EUR', '€'),
+ (90, 'Guatemala', 'GTQ', 'Q'),
+ (94, 'Guyana', 'GYD', '$'),
+ (97, 'Honduras', 'HNL', 'L'),
+ (99, 'Hungary', 'HUF', 'Ft'),
+ (100, 'Iceland', 'ISK', 'kr'),
+ (101, 'India', 'INR', 'Rs.'),
+ (102, 'Indonesia', 'IDR', 'Rp'),
+ (103, 'Iran', 'IRR', '?'),
+ (105, 'Ireland', 'EUR', '€'),
+ (106, 'Israel', 'ILS', '?'),
+ (107, 'Italy', 'EUR', '€'),
+ (108, 'Jamaica', 'JMD', 'J$'),
+ (109, 'Japan', 'JPY', '¥'),
+ (110, 'Jersey', 'JEP', '£'),
+ (112, 'Kazakhstan', 'KZT', '??'),
+ (118, 'Kyrgyzstan', 'KGS', '??'),
+ (119, 'Laos', 'LAK', '?'),
+ (120, 'Latvia', 'LVL', 'Ls'),
+ (121, 'Lebanon', 'LBP', '£'),
+ (123, 'Liberia', 'LRD', '$'),
+ (125, 'Liechtenstein', 'CHF', 'CHF'),
+ (126, 'Lithuania', 'LTL', 'Lt'),
+ (127, 'Luxembourg', 'EUR', '€'),
+ (129, 'Macedonia', 'MKD', '???'),
+ (132, 'Malaysia', 'MYR', 'RM'),
+ (135, 'Malta', 'EUR', '€'),
+ (140, 'Mauritius', 'MUR', '?'),
+ (142, 'Mexico', 'MXN', '$'),
+ (146, 'Mongolia', 'MNT', '?'),
+ (149, 'Mozambique', 'MZN', 'MT'),
+ (151, 'Namibia', 'NAD', '$'),
+ (153, 'Nepal', 'NPR', '?'),
+ (154, 'Netherlands Antilles', 'ANG', 'ƒ'),
+ (157, 'New Zealand', 'NZD', '$'),
+ (158, 'Nicaragua', 'NIO', 'C$'),
+ (160, 'Nigeria', 'NGN', '?'),
+ (164, 'Norway', 'NOK', 'kr'),
+ (165, 'Oman', 'OMR', '?'),
+ (166, 'Pakistan', 'PKR', '?'),
+ (169, 'Panama', 'PAB', 'B/.'),
+ (171, 'Paraguay', 'PYG', 'Gs'),
+ (172, 'Peru', 'PEN', 'S/.'),
+ (173, 'Philippines', 'PHP', 'Php'),
+ (175, 'Poland', 'PLN', 'z?'),
+ (178, 'Qatar', 'QAR', '?'),
+ (180, 'Romania', 'RON', 'lei'),
+ (181, 'Russia', 'RUB', '???'),
+ (183, 'Saint Helena', 'SHP', '£'),
+ (191, 'Saudi Arabia', 'SAR', '?'),
+ (193, 'Serbia', 'RSD', '???.'),
+ (194, 'Seychelles', 'SCR', '?'),
+ (196, 'Singapore', 'SGD', '$'),
+ (198, 'Slovenia', 'EUR', '€'),
+ (200, 'Solomon Islands', 'SBD', '$'),
+ (201, 'Somalia', 'SOS', 'S'),
+ (202, 'South Africa', 'ZAR', 'R'),
+ (205, 'Spain', 'EUR', '€'),
+ (206, 'Sri Lanka', 'LKR', '?'),
+ (208, 'Suriname', 'SRD', '$'),
+ (211, 'Sweden', 'SEK', 'kr'),
+ (212, 'Switzerland', 'CHF', 'CHF'),
+ (213, 'Syria', 'SYP', '£'),
+ (214, 'Taiwan', 'TWD', 'NT$'),
+ (217, 'Thailand', 'THB', '?'),
+ (221, 'Trinidad and Tobago', 'TTD', 'TT$'),
+ (223, 'Turkey', 'TRY', 'TL'),
+ (223, 'Turkey', 'TRL', '£'),
+ (226, 'Tuvalu', 'TVD', '$'),
+ (228, 'Ukraine', 'UAH', '?'),
+ (230, 'United Kingdom', 'GBP', '£'),
+ (233, 'Uruguay', 'UYU', '$U'),
+ (234, 'Uzbekistan', 'UZS', '??'),
+ (237, 'Venezuela', 'VEF', 'Bs'),
+ (238, 'Vietnam', 'VND', '?'),
+ (243, 'Yemen', 'YER', '?'),
+ (246, 'Zimbabwe', 'ZWD', 'Z$');
