@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PricingType extends Model
 {
+    public $timestamps = false;
     /**
      * Get the prices associated with the booking 
      */

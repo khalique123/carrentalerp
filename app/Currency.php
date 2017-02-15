@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Currency extends Model
 {
+    public $timestamps = false;
     /**
      * Get the prices associated with the currency
      */

@@ -18,10 +18,9 @@ class CreateBookingsTable extends Migration
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('company_name')->nullable();
+            $table->integer('vehicle_id');
             $table->string('address');
             $table->integer('city_id');
-            $table->integer('state_id');
-            $table->integer('country_id');
             $table->integer('pin');
             $table->string('phone', 20);
             $table->string('landline', 20)->nullable();

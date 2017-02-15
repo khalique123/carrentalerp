@@ -23,18 +23,18 @@ class BookingLocation extends Model
     }
     
     /**
-     * Get the state of the booking location
+     * Get the state in which branch is located
      */
     public function state()
     {
-        return $this->belongsTo('App\State', 'state_id', 'id');
+        return $this->city()->state();
     }
     
     /**
-     * Get the country of the booking location
+     * Get the country in which branch is located
      */
     public function country()
     {
-        return $this->belongsTo('App\Country', 'country_id', 'id');
+        return $this->city()->state()->country();
     }
 }

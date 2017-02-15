@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
+    public $timestamps = false;
     /**
      * Get the Vehicles with the Vehicle Status.
      */
@@ -27,7 +28,7 @@ class Branch extends Model
      */
     public function state()
     {
-        return $this->belongsTo('App\State', 'state_id', 'id');
+        return $this->city()->state();
     }
     
     /**
@@ -35,6 +36,6 @@ class Branch extends Model
      */
     public function country()
     {
-        return $this->belongsTo('App\Country', 'country_id', 'id');
+        return $this->city()->state()->country();
     }
 }

@@ -31,7 +31,7 @@ class User extends Authenticatable
     }
     
     /**
-     * Get the city in which branch is located
+     * Get the city in which user is located
      */
     public function city()
     {
@@ -39,19 +39,19 @@ class User extends Authenticatable
     }
     
     /**
-     * Get the state in which branch is located
+     * Get the state in which user is located
      */
     public function state()
     {
-        return $this->belongsTo('App\State', 'state_id', 'id');
+        return $this->city()->state();
     }
     
     /**
-     * Get the country in which branch is located
+     * Get the country in which user is located
      */
     public function country()
     {
-        return $this->belongsTo('App\Country', 'country_id', 'id');
+        return $this->city()->state()->country();
     }
     
     /**
@@ -60,5 +60,13 @@ class User extends Authenticatable
     public function photos()
     {
         return $this->morphMany('App\Photo', 'taggable');
+    }
+    
+    /**
+     * Get the status in which user is located
+     */
+    public function status()
+    {
+        return $this->belongsTo('App\UserStatus', 'status', 'id');
     }
 }

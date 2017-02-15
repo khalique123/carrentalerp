@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
 			$table->integer('status');
 			$table->string('address', 190)->nullable();
             $table->integer('city_id');
-            $table->integer('state_id');
-            $table->integer('country_id');
             $table->string('phone_number', 20)->nullable();
             $table->integer('pin');
             $table->rememberToken();

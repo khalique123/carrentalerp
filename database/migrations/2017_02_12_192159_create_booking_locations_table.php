@@ -18,8 +18,6 @@ class CreateBookingLocationsTable extends Migration
             $table->integer('location_sequence');
             $table->integer('address');
             $table->integer('city_id');
-            $table->integer('state_id');
-            $table->integer('country_id');
             $table->integer('pin');
             $table->timestamps();
         });

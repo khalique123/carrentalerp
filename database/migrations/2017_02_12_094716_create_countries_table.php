@@ -16,7 +16,9 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', '100')->unique();
+            $table->string('short_name', 2);
+            $table->string('name', 50);
+            $table->integer('phone_code');
         });
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fuel extends Model
 {
+    public $timestamps = false;
     /**
      * Get the Vehicles with the fuel type.
      */

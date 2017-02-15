@@ -15,9 +15,8 @@ class ForeignBookingsTable extends Migration
     {
         Schema::table('bookings', function (Blueprint $table) {
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->foreign('state_id')->references('id')->on('states');
-            $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign('customer_group_id')->references('id')->on('customer_groups');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });
     }
 
@@ -30,9 +29,8 @@ class ForeignBookingsTable extends Migration
     {
         Schema::table('bookings', function (Blueprint $table) {
             $table->dropForeign(['city_id']);
-            $table->dropForeign(['state_id']);
-            $table->dropForeign(['country_id']);
             $table->dropForeign(['customer_group_id']);
+            $table->dropForeign(['vehicle_id']);
         });
     }
 }

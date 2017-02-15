@@ -23,11 +23,7 @@ class DatabaseSeeder extends Seeder
             
         }
         //if condition for Test Environment Seeding
-        elseif(0 === strcasecmp('test', $environment)) {
-            
-        }
-        //if condition for UAT Environment Seeding
-        elseif(0 === strcasecmp('uat', $environment)) {
+        elseif(0 === strcasecmp('testing', $environment)) {
             
         }
     }

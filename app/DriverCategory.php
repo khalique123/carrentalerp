@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DriverCategory extends Model
 {
+    public $timestamps = false;
     /**
      * Get drivers associated with the category
      */

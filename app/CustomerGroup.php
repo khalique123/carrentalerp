@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerGroup extends Model
 {
+    public $timestamps = false;
     /**
      * Get the booking customer associated with the customer group
      */

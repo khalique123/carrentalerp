@@ -21,15 +21,15 @@ class CreateVehiclesTable extends Migration
             $table->string('engine_number', 50)->unique()->nullable();
             $table->string('make', 20)->nullable();
             $table->string('model', 50)->nullable();
-            $table->string('manu_year', 15)->nullable();
+            $table->smallInteger('manu_year', false, true)->nullable();
             $table->string('color', 15)->nullable();
             $table->integer('vehicle_class_id')->unsigned();
-            $table->integer('weight')->unsigned();
+            $table->integer('weight')->unsigned()->nullable();
             $table->integer('transmission_id')->unsigned();
             $table->longText('description')->nullable();
             $table->integer('fuel_id')->unsigned();
             $table->integer('availability_id')->unsigned();
-            $table->string('vehicle_location', 150);
+            $table->string('vehicle_location', 150)->nullable();
             $table->integer('branch_id')->unsigned();
             $table->integer('vehicle_status_id')->unsigned();
             $table->softDeletes();

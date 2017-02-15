@@ -19,8 +19,6 @@ class CreateBranchesTable extends Migration
             $table->string('name', 50)->unique();
             $table->string('address', 50)->nullable();
             $table->integer('city_id');
-            $table->integer('state_id');
-            $table->integer('country_id');
             $table->integer('pin');
         });
     }

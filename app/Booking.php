@@ -31,19 +31,19 @@ class Booking extends Model
     }
     
     /**
-     * Get the state associated with the booking user
+     * Get the state in which branch is located
      */
     public function state()
     {
-        return $this->belongsTo('App\State','state_id', 'id');
+        return $this->city()->state();
     }
     
     /**
-     * Get the country associated with the booking user
+     * Get the country in which branch is located
      */
     public function country()
     {
-        return $this->belongsTo('App\Country','country_id', 'id');
+        return $this->city()->state()->country();
     }
     
     /**
@@ -68,5 +68,13 @@ class Booking extends Model
     public function locations()
     {
         return $this->hasMany('App\BookingLocation','booking_id', 'id');
+    }
+    
+    /**
+     * Get the vehicle associated with the booking
+     */
+    public function vehicle()
+    {
+        return $this->belongsTo('App\Vehicle','vehicle_id', 'id');
     }
 }

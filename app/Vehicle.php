@@ -70,4 +70,12 @@ class Vehicle extends Model
     {
         return $this->morphMany('App\Photo', 'taggable');
     }
+    
+    /**
+     * Get the bookings associated with the vehicle
+     */
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking','vehicle_id', 'id');
+    }
 }

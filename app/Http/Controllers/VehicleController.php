@@ -15,10 +15,10 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $vehicleInfo = Vehicle::paginate(15);
-            
-        $vehicleInfo->withPath('vehicle/results');
-            
+        /*$vehicleInfo = Vehicle::paginate(15);
+        $vehicleInfo->withPath('vehicle/results');*/
+        
+        $vehicleInfo = Vehicle::all();
         return view('/vehicle/listing', ['vehicle_info' => $vehicleInfo]);
     }
 
@@ -113,7 +113,7 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    /*public function search($from, $to, $class, $location, $branch)
+    public function search($from, $to, $class = "All", $location = "All", $branch = "All")
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
@@ -132,7 +132,7 @@ class VehicleController extends Controller
                 
             return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
         }
-    }*/
+    }
 
     /**
      * Show the form for editing the specified resource.

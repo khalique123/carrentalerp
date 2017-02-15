@@ -45,8 +45,6 @@ Route::delete('vehicle/{id}', 'VehicleController@destroy')
     ->where('id', '[0-9]+')
     ->name('vehicle_delete_route');
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 
 Route::get('/test', 'VehicleController@test');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Availability extends Model
 {
+    public $timestamps = false;
     /**
      * Get the Vehicle associated with the Vehicle Class.
      */

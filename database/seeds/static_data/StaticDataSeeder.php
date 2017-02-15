@@ -11,6 +11,7 @@ class StaticDataSeeder extends Seeder
      */
     public function run()
     {
+        /*
         //can be independently seeded
         $this->call(DriverCategoriesTableSeeder::class);
         //can be independently seeded
@@ -32,6 +33,8 @@ class StaticDataSeeder extends Seeder
         //to be seeded only after states table has been seeded due to foreign key dependency
         $this->call(CitiesTableSeeder::class);       
         //to be seeded only after countries table has been seeded due to foreign key dependency
-        $this->call(CurrenciesTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);*/
+        //Seed the Vehicle table
+        $this->call(VehicleTableSeeder::class);
     }
 }

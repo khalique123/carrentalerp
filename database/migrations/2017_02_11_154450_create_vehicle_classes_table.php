@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateVehicleClassesTable extends Migration
 {
+    public $timestamps = false;
     /**
      * Run the migrations.
      *

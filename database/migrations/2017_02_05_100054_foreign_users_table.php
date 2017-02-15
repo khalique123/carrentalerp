@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ForeignBookingLocationsTable extends Migration
+class ForeignUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ForeignBookingLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('booking_locations', function (Blueprint $table) {
-            $table->foreign('booking_id')->references('id')->on('bookings');
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('status')->references('id')->on('user_statuses');
             $table->foreign('city_id')->references('id')->on('cities');
         });
     }
@@ -26,10 +26,9 @@ class ForeignBookingLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('booking_locations', function (Blueprint $table) {
-            $table->dropForeign(['booking_id']);
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['status']);
             $table->dropForeign(['city_id']);
-            $table->dropForeign(['state_id']);
         });
     }
 }
