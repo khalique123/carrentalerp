@@ -11,6 +11,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(StaticDataSeeder::class);
+        $environment = App::environment();
+        
+        //if condition for Development Environment Seeding
+        if(0 == strcasecmp('dev', $environment)) {
+            
+        }
+        //if condition for Production Environment Seeding
+        elseif(0 === strcasecmp('prod', $environment)) {
+            
+        }
+        //if condition for Test Environment Seeding
+        elseif(0 === strcasecmp('test', $environment)) {
+            
+        }
+        //if condition for UAT Environment Seeding
+        elseif(0 === strcasecmp('uat', $environment)) {
+            
+        }
     }
 }

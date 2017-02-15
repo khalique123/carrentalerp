@@ -18,7 +18,6 @@ class CreateFuelsTable extends Migration
             $table->increments('id');
             $table->string('name', 20)->unique();
             $table->longText('description')->nullable();
-            $table->timestamps();
         });
     }
 

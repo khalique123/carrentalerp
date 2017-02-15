@@ -16,6 +16,7 @@ class CreateDriverCategoriesTable extends Migration
         Schema::create('driver_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', '50')->unique();
+            $table->longText('description');
         });
     }
 

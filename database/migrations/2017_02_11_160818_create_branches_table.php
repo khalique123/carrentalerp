@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCurrenciesTable extends Migration
+class CreateBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateCurrenciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('currencies', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 20);
-            $table->string('code', 3);
-            $table->string('symbol', 5);
+            $table->string('name', 50)->unique();
+            $table->string('address', 50)->nullable();
+            $table->integer('city_id');
+            $table->integer('state_id');
             $table->integer('country_id');
+            $table->integer('pin');
         });
     }
 
@@ -29,6 +32,6 @@ class CreateCurrenciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currencies');
+        Schema::dropIfExists('branches');
     }
 }

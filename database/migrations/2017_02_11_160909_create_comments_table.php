@@ -17,6 +17,8 @@ class CreateCommentsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->longText('comment_text');
+            $table->integer('commentable_id');
+            $table->string('commentable_type', 50);
             $table->timestamps();
         });
     }

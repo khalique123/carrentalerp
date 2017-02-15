@@ -17,7 +17,7 @@ class CreateUserRoleTable extends Migration
             $table->increments('id');
             $table->integer('role_id');
             $table->integer('user_id');
-            $table->integer('status_id');
+            $table->boolean('is_active');
             $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();

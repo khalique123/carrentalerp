@@ -16,6 +16,7 @@ class CreatePricingTypesTable extends Migration
         Schema::create('pricing_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50)->unique();
+            $table->longText('description');
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Vehicle;
+use App\Country;
 
 class VehicleController extends Controller
 {
@@ -232,5 +233,11 @@ class VehicleController extends Controller
             
             return redirect()->route('vehicle_list_route');
         }
+    }
+    
+    public function test() {
+        $vehicleInfo = Country::all();
+            
+        return view('test', ['vehicle_info' => $vehicleInfo]);
     }
 }
