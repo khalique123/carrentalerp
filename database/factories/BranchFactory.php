@@ -14,8 +14,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Branch::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name(50),
-        'address' => $faker->address(50),
+        'name' => $faker->realText(50),
+        'address' => $faker->realText(50),
         'city_id' => function() {
             return factory(App\City::class)->create()->id;
         },

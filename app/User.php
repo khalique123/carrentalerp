@@ -5,13 +5,28 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    /**
+    *
+    */
+    
+    public function __construct(array $attributes = array())
+    {
+        $this->setRawAttributes(array(
+          'status' => 1,
+          'address' => 'hello',
+          'city_id' => 1,
+        ), true);
+        parent::__construct($attributes);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name',  'email', 'password', 'is_active', 'primary_address', 'secondary_address',
+        'first_name', 'last_name',  'email', 'password', 'status', 'address', 'city_id','phone_number', 'pin',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -27,7 +42,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id')->using('App\UserRole');
+        return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');
     }
     
     /**

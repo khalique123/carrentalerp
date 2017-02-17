@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
 			$table->string('address', 190)->nullable();
             $table->integer('city_id');
             $table->string('phone_number', 20)->nullable();
-            $table->integer('pin');
+            $table->integer('pin')->nullable();
             $table->rememberToken();
             $table->timestamps();
 			

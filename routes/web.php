@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/test', function() {
 
-    return view('test');
+    return view('admin/dashboard');
 });
 Route::get('/home', 'HomeController@index');
 
@@ -47,5 +47,5 @@ Route::delete('vehicle/{id}', 'VehicleController@destroy')
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/test', 'VehicleController@test');
-Route::get('/test/results', 'VehicleController@testRes')->name('test_route');
+//Route::get('/test', 'VehicleController@test');
+//Route::get('/test/results', 'VehicleController@testRes')->name('test_route');

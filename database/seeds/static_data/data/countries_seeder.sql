@@ -244,4 +244,5 @@ INSERT INTO `countries` (`id`, `short_name`, `name`, `phone_code`) VALUES
 (243, 'YE', 'Yemen', 967),
 (244, 'YU', 'Yugoslavia', 38),
 (245, 'ZM', 'Zambia', 260),
-(246, 'ZW', 'Zimbabwe', 263);
+(246, 'ZW', 'Zimbabwe', 263),
+(247, '##', 'No Country', 0);

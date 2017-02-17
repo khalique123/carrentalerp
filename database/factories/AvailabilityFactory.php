@@ -14,7 +14,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Availability::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name(20),
+        'name' => $faker->realText(20),
         'description' => $faker->realText(),
     ];
 });

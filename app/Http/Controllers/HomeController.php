@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //$userId = Cookie::get('user_id');
+        $user = User::where('id','=', 1)->first();
+        
+        foreach ($user as $role) {
+            if(0 === strcasecmp($role, 'admin')) {
+                return view('admin/dashboard');
+            }
+        }
+        
+        //return view('home');
+        return view('admin/dashboard', ['test' => $user->roles]);
     }
 }
