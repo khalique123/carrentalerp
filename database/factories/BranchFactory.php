@@ -15,10 +15,10 @@
 $factory->define(App\Branch::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->realText(50),
+        'display_order' => $faker->unique()->numberBetween(1, 100),
         'address' => $faker->realText(50),
         'city_id' => function() {
             return factory(App\City::class)->create()->id;
         },
-        'pin' => $faker->randomNumber(),
     ];
 });

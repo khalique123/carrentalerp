@@ -3,23 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Vehicle;
+use App\Branch;
 use App\Country;
 
-class VehicleController extends Controller
+class BranchController extends Controller
 {
+    /**
+     * only when logged in
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        /*$vehicleInfo = Vehicle::paginate(15);
-        $vehicleInfo->withPath('vehicle/results');*/
-        
-        $vehicleInfo = Vehicle::all();
-        return view('/vehicle/listing', ['vehicle_info' => $vehicleInfo]);
+    {        
+        $branches = Branch::paginate(15);
+        return view('/branch/listing', ['branches' => $branches]);
     }
 
     /**
@@ -29,7 +36,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('/vehicle/create_vehicle');
+        return view('/branch/create');
     }
 
     /**

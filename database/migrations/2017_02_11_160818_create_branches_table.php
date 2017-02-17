@@ -16,10 +16,17 @@ class CreateBranchesTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 50)->unique();
-            $table->string('address', 50)->nullable();
+            $table->integer('display_order');
+            $table->string('name', 190);
+            $table->longText('address')->nullable();
             $table->integer('city_id');
-            $table->integer('pin');
+            $table->string('phone_number', 50)->nullable();
+            $table->string('email', 190)->nullable();
+            $table->string('business_hours', 190)->nullable();
+            $table->boolean('is_active');
+            $table->longText('landmark')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
         });
     }
 
