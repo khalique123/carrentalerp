@@ -80,6 +80,8 @@
             <div class="test">
                 <div class="title m-b-md">
                     Rental Cars
+                    <?php echo e(getenv("DATABASE_URL")); ?>
+
                 </div>
             </div>
         </div>
