@@ -5,7 +5,9 @@
 
     RewriteEngine On
     DirectoryIndex index.php # This line does the trick
-    RewriteBase /public
+    RewriteBase /
+    RewriteRule    ^$ app/public/    [L]
+    RewriteRule    (.*) app/public/$1 [L]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
