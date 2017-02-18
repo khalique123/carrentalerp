@@ -4,10 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-    DirectoryIndex index.php # This line does the trick
     RewriteBase /
-    RewriteRule    ^$ app/public/    [L]
-    RewriteRule    (.*) app/public/$1 [L]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -17,8 +14,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
