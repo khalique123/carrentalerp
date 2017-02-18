@@ -13,7 +13,7 @@ class DriverCategoriesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\driver_categories_seeder.sql';
+        $path = 'public\database\seeds\static_data\data\driver_categories_seeder.sql';
         DB::unprepared(file_get_contents($path));
         $this->command->info('Driver Categories table seeded!');
     }
