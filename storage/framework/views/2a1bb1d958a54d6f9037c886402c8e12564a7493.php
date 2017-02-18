@@ -28,7 +28,7 @@
                                           <a href="email_temp.php?action=edit&id=1">Email Configuration</a>
                                         </li>
                                         <li>
-                                          <a href={{url("password/change")}}>Change Password</a>
+                                          <a href=<?php echo e(url("password/change")); ?>>Change Password</a>
                                         </li>
                                         <li>
                                           <a href="manage_users.php">Manage Users</a>
@@ -65,7 +65,7 @@
                                     <td class="lp_link">
                                       <ul>
                                         <li>
-                                          <a href={{url('home')}}>Home</a>
+                                          <a href=<?php echo e(url('home')); ?>>Home</a>
                                         </li>
                                         <li>
                                           <a href="manage_content.php">Manage Content </a>
@@ -105,7 +105,7 @@
                                           <a href="../index.php" target="_blank">Go to Reservation Page </a>
                                         </li>
                                         <li>
-                                          <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                          <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                         </li>
                                       </ul>
                                     </td>

@@ -49,7 +49,7 @@ Route::delete('vehicle/{id}', 'VehicleController@destroy')
 * Home Page
 *
 */
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/test', 'VehicleController@test');
 //Route::get('/test/results', 'VehicleController@testRes')->name('test_route');
@@ -57,14 +57,14 @@ Route::get('/home', 'HomeController@index');
 
 /*
 * Vehicle location related routes
-*
+*   
 */
 Route::get('branch', 'BranchController@index')
     ->name('branch_list_route');
 Route::get('branch/create', 'BranchController@create')
     ->name('branch_create_route');
 Route::post('branch', 'BranchController@store')
-    ->name('vehicle_insert_route');
+    ->name('branch_insert_route');
 Route::get('branch/{id}', 'BranchController@show')
     ->where('id', '[0-9]+')
     ->name('branch_show_route');

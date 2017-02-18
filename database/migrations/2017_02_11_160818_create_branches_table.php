@@ -17,7 +17,7 @@ class CreateBranchesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('display_order');
-            $table->string('name', 190);
+            $table->string('name', 190)->unique();
             $table->longText('address')->nullable();
             $table->integer('city_id');
             $table->string('phone_number', 50)->nullable();
@@ -25,8 +25,8 @@ class CreateBranchesTable extends Migration
             $table->string('business_hours', 190)->nullable();
             $table->boolean('is_active');
             $table->longText('landmark')->nullable();
-            $table->decimal('latitude', 10, 7)->nullable();
-            $table->decimal('longitude', 10, 7)->nullable();
+            $table->float('latitude', 10, 7)->nullable();
+            $table->float('longitude', 10, 7)->nullable();
         });
     }
 

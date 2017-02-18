@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Branch;
 use App\Country;
+use App\State;
+use App\City;
 
 class BranchController extends Controller
 {
@@ -36,7 +41,10 @@ class BranchController extends Controller
      */
     public function create()
     {
-        return view('/branch/create');
+        $countries = Country::all();
+        $states = State::limit(30)->offset(30)->get();
+        $cities = City::limit(30)->offset(30)->get();
+        return view('/branch/create', ['countries' => $countries, 'states' => $states, 'cities' => $cities]);
     }
 
     /**
@@ -47,44 +55,39 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'first_name'       => 'required',
-            'email'      => 'required|email',
-            'registration_number' => 'required'
+            'disp_order'    => 'required|numeric',
+            'loc_name'      => 'required',
+            'city'          => 'required|numeric',
+            'email'         => 'email',
+            'gmaplat'       => 'numeric',
+            'gmaplng'       => 'numeric',
         );
         $validator = Validator::make(Input::all(), $rules);
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('vehicle/create')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
+            return Redirect::to('branch/create')
+                ->withErrors($validator);
         } else {
             // store
-            $vehicle = new Vehicle;
-            $vehicle->reg_number               = Input::get('reg_number');
-            $vehicle->chassis_number           = Input::get('chassis_number');
-            $vehicle->engine_number            = Input::get('engine_number');
-            $vehicle->make                     = Input::get('make');
-            $vehicle->model                    = Input::get('model');
-            $vehicle->manu_year                = Input::get('manu_year');
-            $vehicle->color                    = Input::get('color');
-            $vehicle->vehicle_class_id         = Input::get('vehicle_class_id');
-            $vehicle->weight                   = Input::get('weight');
-            $vehicle->transmission_id          = Input::get('transmission_id');
-            $vehicle->description              = Input::get('description');
-            $vehicle->fuel_id                  = Input::get('fuel_id');
-            $vehicle->availability_id          = Input::get('availability_id');
-            $vehicle->vehicle_location         = Input::get('vehicle_location');
-            $vehicle->branch_id                = Input::get('branch_id');
-            $vehicle->vehicle_status_id        = Input::get('vehicle_status_id');
-            $vehicle->save();
+            $branch = new Branch;
+            $branch->display_order            = Input::get('disp_order');
+            $branch->name                     = Input::get('loc_name');
+            $branch->address                  = Input::get('address');
+            $branch->city_id                  = Input::get('city');
+            $branch->phone_number             = Input::get('phone');
+            $branch->email                    = Input::get('email');
+            $branch->business_hours           = Input::get('busihour');
+            $branch->is_active                = 1;
+            $branch->landmark                 = Input::get('landmark');
+            $branch->latitude                 = Input::get('gmaplat');
+            $branch->longitude                = Input::get('gmaplng');
+            $branch->save();
             
             // redirect
-            Session::flash('message', 'Successfully Entered Vehicle Information for Registration Number '.Input::get('reg_number').'.');
-            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info inserted successfully']);
+            $branches = Branch::paginate(15);
+            return redirect()->route('branch_list_route');
         }
     }
 
@@ -96,22 +99,12 @@ class BranchController extends Controller
      */
     public function show($id)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'id'       => 'required|digits_between:0,1000000'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator);
-        } else {
-            $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
-                
-            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => '']);
-        }
+        $countries = Country::all();
+        $states = State::limit(30)->offset(30)->get();
+        $cities = City::limit(30)->offset(30)->get();
+        $branch = Branch::where('id', '=', $id);
+        
+        return view('/branch/show', ['branch' => $branch, 'countries' => $countries, 'states' => $states, 'cities' => $cities]);
     }
     
     /**
@@ -221,25 +214,11 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'id'       => 'required|digits_between:0,1000000'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator);
-        } else {
-            $vehicle = App\Vehicle::where('id', $id);
-            $vehicle->delete();
-            
-            return redirect()->route('vehicle_list_route');
-        }
+        $affectedRows  = Branch::where('id', '=', $id)->delete();
+        //return response()->json(array('affectedRows' => $affectedRows), 200);
+        return redirect()->route('branch_list_route');
     }
     
     public function test() {
