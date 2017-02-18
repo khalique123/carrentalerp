@@ -47,7 +47,6 @@
           <form id="delete-branch-{{$branch->id}}" action="{{ route('branch_delete_route', ['id' => $branch->id,]) }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                     {{method_field('DELETE')}}
-            <input type="hidden" value="{{$branch->id}}">
             <td bgcolor="#FFFFFF" style="padding-left:5px;" class="txt_1">
               <div align="center" class="con-txt">{{$branch->name}}</div>
             </td>
@@ -55,7 +54,7 @@
             <td width="15%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
               <div align="center" class="txt">
                 <b>
-                  <a href="add_location.php?action=edit&location_id=1"  >Edit</a>
+                  <a href="{{route()}}"  >Edit</a>
                 </b>&nbsp;</div>
             </td>
             <td width="16%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
