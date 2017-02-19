@@ -54,7 +54,7 @@
             <td width="15%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
               <div align="center" class="txt">
                 <b>
-                  <a href="{{route()}}"  >Edit</a>
+                  <a href="{{route('branch_edit_route', ['id' => $branch->id])}}"  >Edit</a>
                 </b>&nbsp;</div>
             </td>
             <td width="16%"  align="center" bgcolor="#FFFFFF"  class="link_1" >

@@ -49,11 +49,6 @@
 
                     <?php echo e(method_field('DELETE')); ?>
 
-            <?php if($errors->has('id')): ?>
-                <span class="help-block">
-                    <strong><?php echo e($errors->first('id')); ?></strong>
-                </span>
-            <?php endif; ?>
             <td bgcolor="#FFFFFF" style="padding-left:5px;" class="txt_1">
               <div align="center" class="con-txt"><?php echo e($branch->name); ?></div>
             </td>
@@ -61,7 +56,7 @@
             <td width="15%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
               <div align="center" class="txt">
                 <b>
-                  <a href="add_location.php?action=edit&location_id=1"  >Edit</a>
+                  <a href="<?php echo e(route('branch_edit_route', ['id' => $branch->id])); ?>"  >Edit</a>
                 </b>&nbsp;</div>
             </td>
             <td width="16%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
