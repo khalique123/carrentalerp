@@ -30,7 +30,7 @@
  (65, 'El Salvador', 'SVC', ''),
  (71, 'Falkland Islands', 'FKP', ''),
  (75, 'France', 'EUR', ''),
- (83, 'Ghana', 'GHC', '¢'),
+ (83, 'Ghana', 'GHC', ''),
  (84, 'Gibraltar', 'GIP', ''),
  (85, 'Greece', 'EUR', ''),
  (90, 'Guatemala', 'GTQ', 'Q'),
