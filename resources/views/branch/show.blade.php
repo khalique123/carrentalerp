@@ -23,7 +23,7 @@
                                 </b>
                             </td>
                             <td >
-                                <input type="text" name="disp_order" id="disp_order" class="txtbox" value="{{$branch->name}}" />
+                                <input type="text" name="disp_order" id="disp_order" class="txtbox" value="{{$branch->display_order}}" />
                             </td>
                             <td>
                                 <input type="hidden" name="ID" value="{{$branch->id}}" />
@@ -35,7 +35,7 @@
                                 </b>
                             </td>
                             <td>
-                                <input type="text" name="loc_name" id="loc_name" class="txtbox" value="" />
+                                <input type="text" name="loc_name" id="loc_name" class="txtbox" value="{{$branch->name}}" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
