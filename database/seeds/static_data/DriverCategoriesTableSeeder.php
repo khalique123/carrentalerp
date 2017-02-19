@@ -14,12 +14,10 @@ class DriverCategoriesTableSeeder extends Seeder
         Eloquent::unguard();
 
         $filename = "/database/seeds/static_data/diver_categories_seeder.sql";
-$handle = fopen($filename, "r");
-$fcontents = fread($handle, filesize($filename));
-fclose($handle);
-echo $fcontents;
+
+        $output = shell_exec('cat '.$filename);
         $path = '/database/seeds/static_data/diver_categories_seeder.sql';
-        DB::unprepared(file_get_contents($fcontents));
+        DB::unprepared(($output));
         $this->command->info('Driver Categories table seeded!');
     }
 }
