@@ -17,6 +17,7 @@ $factory->define(App\Branch::class, function (Faker\Generator $faker) {
         'name' => $faker->realText(50),
         'display_order' => $faker->unique()->numberBetween(1, 100),
         'address' => $faker->realText(50),
+        'is_active' => $faker->boolean(100),
         'city_id' => function() {
             return factory(App\City::class)->create()->id;
         },
