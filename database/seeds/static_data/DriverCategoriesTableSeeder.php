@@ -15,9 +15,10 @@ class DriverCategoriesTableSeeder extends Seeder
 
         $filename = "/database/seeds/static_data/driver_categories_seeder.sql";
 
-        $output = shell_exec('cat '.$filename);
+        $output = shell_exec('cat '.$filename.' 2>&1');
         $path = '/database/seeds/static_data/diver_categories_seeder.sql';
         DB::unprepared(($output));
+        
         $this->command->info('Driver Categories table seeded!');
     }
 }
