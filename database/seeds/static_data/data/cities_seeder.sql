@@ -48337,4 +48337,4 @@ INSERT INTO cities (id, name, state_id) VALUES
 (48312, 'Lewisburg', 3976),
 (48313, 'Ravenswood', 3976),
 (48314, 'Summersville', 3976),
-(48315, 'No City', 0);
+(48315, 'No City', 4121);

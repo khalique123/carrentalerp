@@ -4120,4 +4120,4 @@ INSERT INTO states (id, name, country_id) VALUES
 (4118, 'Matabeleland North', 246),
 (4119, 'Matabeleland South', 246),
 (4120, 'Midlands', 246),
-(4121, 'No State', 0);
+(4121, 'No State', 247);
