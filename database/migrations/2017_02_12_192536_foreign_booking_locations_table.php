@@ -29,7 +29,6 @@ class ForeignBookingLocationsTable extends Migration
         Schema::table('booking_locations', function (Blueprint $table) {
             $table->dropForeign(['booking_id']);
             $table->dropForeign(['city_id']);
-            $table->dropForeign(['state_id']);
         });
     }
 }
