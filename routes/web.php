@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/test', function() {
 
-    return view('admin/dashboard');
+    return view('test');
 });
 Route::get('/home', 'HomeController@index');
 Route::get('/password/change', 'Auth\ChangePasswordController@index')
