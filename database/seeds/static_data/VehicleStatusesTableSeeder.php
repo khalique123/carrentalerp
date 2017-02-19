@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use Illuminate/Database/Seeder;
 
 class VehicleStatusesTableSeeder extends Seeder
 {
@@ -13,8 +13,10 @@ class VehicleStatusesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\vehicle_statuses_seeder.sql';
-        DB::unprepared(file_get_contents($path));
+        $path = 'database/seeds/static_data/data/vehicle_statuses_seeder.sql';
+        $output = shell_exec('cat '.$path);
+        DB::unprepared($output);
+        
         $this->command->info('Vehicle Statuses table seeded!');
     }
 }

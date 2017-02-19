@@ -13,8 +13,10 @@ class PricingTypesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\pricing_types_seeder.sql';
-        DB::unprepared(file_get_contents($path));
+        $path = 'database/seeds/static_data/data/pricing_types_seeder.sql';
+        $output = shell_exec('cat '.$path);
+        DB::unprepared($output);
+        
         $this->command->info('Pricing Types table seeded!');
     }
 }

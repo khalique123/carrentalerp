@@ -13,8 +13,10 @@ class CurrenciesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\currencies_seeder.sql';
-        DB::unprepared(file_get_contents($path));
+        $path = 'database/seeds/static_data/data/currencies_seeder.sql';
+        $output = shell_exec('cat '.$path);
+        DB::unprepared($output);
+        
         $this->command->info('Currencies table seeded!');
     }
 }

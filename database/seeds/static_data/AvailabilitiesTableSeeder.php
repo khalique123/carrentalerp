@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use Illuminate/Database/Seeder;
 
 class AvailabilitiesTableSeeder extends Seeder
 {
@@ -13,8 +13,10 @@ class AvailabilitiesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\availabilities_seeder.sql';
-        DB::unprepared(file_get_contents($path));
+        $path = 'database/seeds/static_data/data/availabilities_seeder.sql';
+        $output = shell_exec('cat '.$path);
+        DB::unprepared($output);
+        
         $this->command->info('Availabilities table seeded!');
     }
 }

@@ -11,22 +11,12 @@ class CitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        // =============================================================
-        // file Path -> Project/app/configs/database.php
-        // get the database name, database username, database password
-        // =============================================================
-        $db     = \Config::get('database.connections.mysql.database');
-        $user   = \Config::get('database.connections.mysql.username');
-        $pass   = \Config::get('database.connections.mysql.password');
-
-        // running command line import in php code
-        exec("mysql -u " . $user . " -p" . $pass . " " . $db . " < \data\cities_seeder.sql");*/
-        
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\cities_seeder.sql';
-        DB::unprepared(file_get_contents($path));
+        $path = 'database/seeds/static_data/data/cities_seeder.sql';
+        $output = shell_exec('cat '.$path);
+        DB::unprepared($output);
+        
         $this->command->info('Cities table seeded!');
     }
 }

@@ -13,8 +13,10 @@ class RolesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = 'database\seeds\static_data\data\roles_seeder.sql';
-        DB::unprepared(file_get_contents($path));
+        $path = 'database/seeds/static_data/data/roles_seeder.sql';
+        $output = shell_exec('cat '.$path);
+        DB::unprepared($output);
+        
         $this->command->info('Roles table seeded!');
     }
 }
