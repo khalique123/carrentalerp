@@ -37,6 +37,6 @@ class StaticDataSeeder extends Seeder
         //to be seeded only after countries table has been seeded due to foreign key dependency
         $this->call(CurrenciesTableSeeder::class);
         //Seed the Vehicle table
-        $this->call(VehicleTableSeeder::class);
+        //$this->call(VehicleTableSeeder::class);
     }
 }

@@ -14,6 +14,6 @@ class VehicleTableSeeder extends Seeder
         Eloquent::unguard();
         factory(App\Vehicle::class)->create();
         
-        $this->command->info('Pricing Types table seeded!');
+        $this->command->info('Vehicle table seeded!');
     }
 }
