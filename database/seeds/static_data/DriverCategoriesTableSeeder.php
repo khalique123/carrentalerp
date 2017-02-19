@@ -13,12 +13,12 @@ class DriverCategoriesTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $curl_handle=curl_init();
-curl_setopt($curl_handle, CURLOPT_URL, '/database/seeds/static_data/driver_categories_seeder.sql');
-$xml_file = curl_exec($curl_handle);
-curl_close($curl_handle);
-        $path = '/database/seeds/static_data/driver_categories_seeder.sql';
-        DB::unprepared($xml_file);
+        $filename = "driver_categories_seeder.sql";
+
+        $this->command->info(shell_exec('pwd'));
+        $output = shell_exec('cat '.$filename);
+        $path = '/database/seeds/static_data/diver_categories_seeder.sql';
+        DB::unprepared(file_get_contents$output);
         
         $this->command->info('Driver Categories table seeded!');
     }

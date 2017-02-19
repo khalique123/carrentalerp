@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="<?php echo e(config('app.locale')); ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,6 +66,5 @@
     </head>
     <body>
     <?php $appRootPath = getenv('APP_ROOT_PATH'); ?>
-    {{phpinfo()}}
     </body>
 </html>
