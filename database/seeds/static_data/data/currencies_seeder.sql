@@ -1,4 +1,4 @@
- INSERT INTO `currencies` (`country_id`, `name`, `code`, `symbol`) VALUES
+ INSERT INTO currencies (country_id, name, code, symbol) VALUES
  (1, 'Afghanistan', 'AFN', '?'),
  (2, 'Albania', 'ALL', 'Lek'),
  (10, 'Argentina', 'ARS', '$'),
