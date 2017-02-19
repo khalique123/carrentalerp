@@ -65,6 +65,6 @@
         </style>
     </head>
     <body>
-    {{$vehicle_info}}
+    {{phpinfo()}}
     </body>
 </html>
