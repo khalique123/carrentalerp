@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AppServiceProvider extends ServiceProvider
 {    
@@ -17,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('hash_match',
             function ($attribute, $value, $parameters, $validator)
             {
-                return Hash::check($value, Auth::user()->password);
+                $result = Hash::check($value, $parameters[0]);
+                return $result;
             }
         );
     }

@@ -1,4 +1,4 @@
-@include('header') @include('leftpanel')<td width="2%">&nbsp;</td>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> <?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -9,8 +9,9 @@
         </tr>
         <tr>
             <td valign="top" class="txt_1"  align="center">
-                <form name="frmchangepass" id="frmchangepass" method="POST" action="{{route('update_password')}}" onsubmit="return check_pwordchange();"  style="padding-left:5px;">
-                    {{csrf_field()}}
+                <form name="frmchangepass" id="frmchangepass" method="POST" action="<?php echo e(route('update_password')); ?>" onsubmit="return check_pwordchange();"  style="padding-left:5px;">
+                    <?php echo e(csrf_field()); ?>
+
                     <table width="100%"  cellpadding="2" cellspacing="4" bgcolor="#f3f3f3">
                         <tr>
                             <td colspan="3" style="padding-left:70px;">
@@ -23,11 +24,11 @@
                             </td>
                             <td>
                                 <input type="password" name="old_password" id="old_password" class="txtbox"/>
-                                @if ($errors->has('old_password'))
+                                <?php if($errors->has('old_password')): ?>
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('old_password') }}</strong>
+                                    <strong><?php echo e($errors->first('old_password')); ?></strong>
                                 </span>
-                                @endif
+                                <?php endif; ?>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -37,11 +38,11 @@
                             </td>
                             <td>
                                 <input type="password" name="password" id="password" class="txtbox"/>
-                                @if ($errors->has('password'))
+                                <?php if($errors->has('password')): ?>
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
+                                    <strong><?php echo e($errors->first('password')); ?></strong>
                                 </span>
-                                @endif
+                                <?php endif; ?>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -51,11 +52,11 @@
                             </td>
                             <td>
                                 <input type="password" name="confirm_password" id="confirm_password" class="txtbox"/>
-                                @if ($errors->has('confirm_password'))
+                                <?php if($errors->has('confirm_password')): ?>
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('confirm_password') }}</strong>
+                                    <strong><?php echo e($errors->first('confirm_password')); ?></strong>
                                 </span>
-                                @endif
+                                <?php endif; ?>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -78,15 +79,15 @@
 </table>
 </td>
 </tr>
-@if ( Session::has('flash_message') )
+<?php if( Session::has('flash_message') ): ?>
 <tr>
     <td>
-        <div class="alert {{ Session::get('flash_type') }}">
-            <h3>{{ Session::get('flash_message') }}</h3>
+        <div class="alert <?php echo e(Session::get('flash_type')); ?>">
+            <h3><?php echo e(Session::get('flash_message')); ?></h3>
         </div>
          <?php echo '<pre>';var_dump(Session::all()); ?>
     </td>
 </tr>
 
-@endif
-@include('footer')
+<?php endif; ?>
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

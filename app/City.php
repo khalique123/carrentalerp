@@ -38,4 +38,12 @@ class City extends Model
     {
         return $this->hasMany('App\BookingLocation','city_id');
     }
+    
+    /**
+     * Get the state of the city
+     */
+    public function state()
+    {
+        return $this->belongsTo('App\State','state_id');
+    }
 }

@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Branch;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,11 +19,15 @@ Auth::routes();
 
 Route::get('/test', function() {
 
-    return view('test');
+    return view('test', ['branch' => Branch::where('id', '=', 1)->first()]);
 });
 Route::get('/home', 'HomeController@index');
+//Route to display change password page
 Route::get('/password/change', 'Auth\ChangePasswordController@index')
     ->name('change_password');
+//Route to update password after password is entered in the form
+Route::post('/password/update', 'Auth\ChangePasswordController@update')
+    ->name('update_password');
 /*
 | Controller to control vehicles
 */
@@ -59,6 +63,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 * Vehicle location related routes
 *   
 */
+Route::post('branch/form_submit', 'BranchController@processInputBasedRequest')
+    ->name('branch_decision_route');
 Route::get('branch', 'BranchController@index')
     ->name('branch_list_route');
 Route::get('branch/create', 'BranchController@create')
@@ -77,3 +83,29 @@ Route::put('branch/{id}', 'BranchController@update')
 Route::delete('branch/{id}', 'BranchController@destroy')
     ->where('id', '[0-9]+')
     ->name('branch_delete_route');
+
+
+/*
+* Vehicle class related routes
+*   
+*/
+Route::post('vehicle_class/form_submit', 'VehicleClassController@processInputBasedRequest')
+    ->name('vehicle_class_decision_route');
+Route::get('vehicle_class', 'VehicleClassController@index')
+    ->name('vehicle_class_list_route');
+Route::get('vehicle_class/create', 'VehicleClassController@create')
+    ->name('vehicle_class_create_route');
+Route::post('vehicle_class', 'VehicleClassController@store')
+    ->name('vehicle_class_insert_route');
+Route::get('vehicle_class/{id}', 'VehicleClassController@show')
+    ->where('id', '[0-9]+')
+    ->name('vehicle_class_show_route');
+Route::get('vehicle_class/{id}/edit', 'VehicleClassController@edit')
+    ->where('id', '[0-9]+')
+    ->name('vehicle_class_edit_route');
+Route::put('vehicle_class/{id}', 'VehicleClassController@update')
+    ->where('id', '[0-9]+')
+    ->name('vehicle_class_update_route');
+Route::delete('vehicle_class/{id}', 'VehicleClassController@destroy')
+    ->where('id', '[0-9]+')
+    ->name('vehicle_class_delete_route');

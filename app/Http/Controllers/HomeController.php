@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,15 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         //$userId = Cookie::get('user_id');
-        $user = User::where('id','=', 1)->first();
+        $user = Auth::user();
+        $roles = $user->roles();
         
-        foreach ($user as $role) {
+        foreach ($roles as $role) {
             if(0 === strcasecmp($role, 'admin')) {
                 return view('admin/dashboard');
             }
         }
         
         //return view('home');
-        return view('admin/dashboard', ['test' => $user->roles]);
+        return view('admin/dashboard');
     }
 }

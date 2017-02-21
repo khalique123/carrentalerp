@@ -16,5 +16,6 @@ $factory->define(App\VehicleClass::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name(),
         'description' => $faker->realText(),
+        'is_active' => 1,
     ];
 });

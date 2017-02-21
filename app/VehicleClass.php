@@ -14,4 +14,12 @@ class VehicleClass extends Model
     {
         return $this->hasMany('App\Vehicle', 'vehicle_class_id', 'id');
     }
+    
+    /**
+     * Get all of the vehicle class prices.
+     */
+    public function prices()
+    {
+        return $this->morphMany('App\DefaultPrice', 'priceable');
+    }
 }

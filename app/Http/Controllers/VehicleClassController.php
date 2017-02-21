@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\VehicleClass;
+use App\Vehicle;
+use Validator;
+use Illuminate\Support\Facades\Input;
 
 class VehicleClassController extends Controller
 {
@@ -14,6 +18,38 @@ class VehicleClassController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+    
+    /**
+     * Route to decide what should be the action of the form submitting to it
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processInputBasedRequest(Request $request)
+    {   
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'id'       => 'required|numeric',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process
+        if ($validator->fails()) {
+            return back();
+        }
+        
+        //this is meant to handle only one request at a time not both
+        if ($request->has('delete') && $request->has('deactivate')) {
+            return back();
+        } else if ($request->has('delete')) {
+            return VehicleClassController::destroy($request->id);
+        } else if ($request->has('deactivate')) {
+            $vehicleClass = VehicleClass::find($request->id);
+            $vehicleClass->is_active = TRUE;
+            $vehicleClass->save();
+            return back();
+        }
     }
     
     /**
@@ -107,7 +143,7 @@ class VehicleClassController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
+            $vehicleInfo = Vehicle::where('id', '=', $id)->first();
                 
             return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => '']);
         }
@@ -134,7 +170,7 @@ class VehicleClassController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicleInfo = App\Vehicle::where('id', '=', $id);
+            $vehicleInfo = Vehicle::where('id', '=', $id);
                 
             return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
         }
@@ -160,9 +196,9 @@ class VehicleClassController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicleInfo = $vehicleInfo = App\Vehicle::where('id', '=', $id)->first();
+            $vehicleClass =  VehicleClass::find($id);
                                 
-            return view('edit_vehicle', ['vehicle_info' => $vehicleInfo]);
+            return view('/vehicle/class/edit', ['vehicle_class' => $vehicleClass]);
         }
     }
 
@@ -188,7 +224,7 @@ class VehicleClassController extends Controller
                 ->withErrors($validator);
         } else {
             // store
-            $vehicle = App\Vehicle::where('id', $id)->first();
+            $vehicle = Vehicle::where('id', $id)->first();
 
             $vehicle->reg_number               = Input::get('reg_number');
             $vehicle->chassis_number           = Input::get('chassis_number');
@@ -208,7 +244,7 @@ class VehicleClassController extends Controller
             $vehicle->vehicle_status_id        = Input::get('vehicle_status_id');
             $vehicle->save();
                         
-            $vehicleInfo = App\Vehicle::where('id', $id)->first();
+            $vehicleInfo = Vehicle::where('id', $id)->first();
                                 
             return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info updated successfully.']);
         }
@@ -234,16 +270,10 @@ class VehicleClassController extends Controller
             return back()
                 ->withErrors($validator);
         } else {
-            $vehicle = App\Vehicle::where('id', $id);
-            $vehicle->delete();
+            $vehicleClass = VehicleClass::where('id', $id);
+            $vehicleClass->delete();
             
-            return redirect()->route('vehicle_list_route');
+            return redirect()->route('vehicle_class_list_route');
         }
-    }
-    
-    public function test() {
-        $vehicleInfo = Country::all();
-            
-        return view('test', ['vehicle_info' => $vehicleInfo]);
     }
 }

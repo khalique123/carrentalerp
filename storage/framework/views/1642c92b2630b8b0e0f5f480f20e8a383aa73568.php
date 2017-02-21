@@ -1,9 +1,11 @@
-<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>  <?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></td>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>  
+<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</td>
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-            <td class="heading_1" style="padding:5px;">Add Rental Locations</td>
+            <td class="heading_1" style="padding:5px;">Add Rental Location:</td>
         </tr>
         <tr>
             <td>&nbsp;</td>

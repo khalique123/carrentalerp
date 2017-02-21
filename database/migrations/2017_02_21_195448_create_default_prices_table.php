@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVehicleClassesTable extends Migration
+class CreateDefaultPricesTable extends Migration
 {
-    public $timestamps = false;
     /**
      * Run the migrations.
      *
@@ -14,13 +13,13 @@ class CreateVehicleClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehicle_classes', function (Blueprint $table) {
+        Schema::create('default_prices', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 50)->unique();
-            $table->longText('description')->nullable();
-            $table->integer('photo_id')->nullable();
-            $table->boolean('is_active');
+            $table->morphs('priceable');
+            $table->integer('pricing_type');
+            $table->float('rate', 10, 2);
+            $table->integer('pricing_season_id');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateVehicleClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicle_classes');
+        Schema::dropIfExists('default_prices');
     }
 }

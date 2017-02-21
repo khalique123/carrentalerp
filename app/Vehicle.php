@@ -44,7 +44,7 @@ class Vehicle extends Model
      */
     public function branch()
     {
-        return $this->belongsTo('App\Branch', 'branch_id');
+        return $this->belongsTo('App\Branch', 'branch_id', 'id');
     }
     
     /**
@@ -77,5 +77,13 @@ class Vehicle extends Model
     public function bookings()
     {
         return $this->hasMany('App\Booking','vehicle_id', 'id');
+    }
+    
+    /**
+     * Get all of the vehicle prices.
+     */
+    public function prices()
+    {
+        return $this->morphMany('App\DefaultPrice', 'priceable');
     }
 }

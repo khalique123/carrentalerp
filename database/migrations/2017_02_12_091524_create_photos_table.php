@@ -18,8 +18,7 @@ class CreatePhotosTable extends Migration
             $table->increments('id');
             $table->morphs('taggable');
             $table->boolean('default');
-            $table->longText('picture_path')->nullable();
-            $table->timestamps();
+            $table->longText('image_url')->nullable();
         });
     }
 

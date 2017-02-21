@@ -65,6 +65,7 @@
         </style>
     </head>
     <body>
-    <?php $appRootPath = getenv('APP_ROOT_PATH'); ?>
+    <?php echo getenv('APP_ROOT_PATH'); ?>
+    <?php $city = $branch->city; $state = $city->state; echo($branch->city->state->id) ?>
     </body>
 </html>

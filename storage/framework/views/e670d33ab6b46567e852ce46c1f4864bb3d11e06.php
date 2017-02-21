@@ -50,8 +50,8 @@
                 <td height="50" bgcolor="#F4F4F4" style="padding:0px 20px; border:1px solid #e0e0e0;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 
                                                <tr>
-                    <td width="22%" align="left"><a href="manage_carclass.php"><img src="images/icon_manage_carclass.gif" alt="Manage Vehicle Class" width="30" height="25" border="0" /></a></td>
-                    <td width="78%" class="index_link"><a href="manage_carclass.php">Vehicle Classes</a></td>
+                    <td width="22%" align="left"><a href="<?php echo e(route('vehicle_class_list_route')); ?>"><img src="images/icon_manage_carclass.gif" alt="Manage Vehicle Class" width="30" height="25" border="0" /></a></td>
+                    <td width="78%" class="index_link"><a href="<?php echo e(route('vehicle_class_list_route')); ?>">Vehicle Classes</a></td>
                   </tr>
                                   </table></td>
                 <td>&nbsp;</td>
