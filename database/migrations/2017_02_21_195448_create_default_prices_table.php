@@ -17,9 +17,9 @@ class CreateDefaultPricesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->morphs('priceable');
-            $table->integer('pricing_type');
+            $table->integer('pricing_type')->unsigned();
             $table->float('rate', 10, 2);
-            $table->integer('pricing_season_id');
+            $table->integer('pricing_season_id')->unsigned();
         });
     }
 

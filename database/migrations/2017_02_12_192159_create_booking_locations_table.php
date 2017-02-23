@@ -14,10 +14,11 @@ class CreateBookingLocationsTable extends Migration
     public function up()
     {
         Schema::create('booking_locations', function (Blueprint $table) {
-            $table->integer('booking_id');
+            $table->engine = 'InnoDB';
+            $table->integer('booking_id')->unsigned();
             $table->integer('location_sequence');
             $table->integer('address');
-            $table->integer('city_id');
+            $table->integer('city_id')->unsigned();
             $table->integer('pin');
             $table->timestamps();
         });

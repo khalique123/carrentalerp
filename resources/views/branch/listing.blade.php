@@ -66,7 +66,7 @@
                                 </b>&nbsp;</div>
                         </td>
                         <td width="15%"  align="center" bgcolor="#FFFFFF" >
-                            <a type="submit" href=# name="deactivate" value="true">
+                            <a href=# onclick="$(this).closest('form').submit()" name="deactivate" value=@if($branch->is_active == 1) "false" @else "true" @endif>
                                 @if($branch->is_active == 1)
                                 <img src={{asset("/images/icon_active.gif")}} alt="Deactivate Location" title="Deactivate Location" width="10" height="10" border="0" />
                                 @else

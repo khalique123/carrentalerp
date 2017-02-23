@@ -14,9 +14,10 @@ class CreateUserRoleTable extends Migration
     public function up()
     {
         Schema::create('user_role', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('role_id');
-            $table->integer('user_id');
+            $table->integer('role_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->boolean('is_active');
             $table->longText('description')->nullable();
             $table->softDeletes();

@@ -14,6 +14,7 @@ class CreateRentalAccessoriesTable extends Migration
     public function up()
     {
         Schema::create('rental_accessories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('code', 50);
             $table->string('name');

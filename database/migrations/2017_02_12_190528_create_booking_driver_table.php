@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ForeignBookingDriverTable extends Migration
+class CreateBookingDriverTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class ForeignBookingDriverTable extends Migration
     public function up()
     {
         Schema::create('booking_driver', function (Blueprint $table) {
-            $table->integer('booking_id');
-            $table->integer('driver_id');
+            $table->engine = 'InnoDB';
+            $table->integer('booking_id')->unsigned();
+            $table->integer('driver_id')->unsigned();
             $table->integer('driver_sequence');
             $table->timestamps();
         });

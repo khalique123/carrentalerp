@@ -67,12 +67,13 @@
                                 </b>&nbsp;</div>
                         </td>
                         <td width="15%"  align="center" bgcolor="#FFFFFF" >
+                            <a href=# onclick="$(this).closest('form').submit()" name="deactivate" value=<?php if($branch->is_active == 1): ?> "false" <?php else: ?> "true" <?php endif; ?>>
                                 <?php if($branch->is_active == 1): ?>
-                                <input type="img" name="switch_active_status"  src=<?php echo e(asset("/images/icon_active.gif")); ?> alt="Deactivate Location" title="Deactivate Location" width="10" height="10" border="0" />
+                                <img src=<?php echo e(asset("/images/icon_active.gif")); ?> alt="Deactivate Location" title="Deactivate Location" width="10" height="10" border="0" />
                                 <?php else: ?>
-                                <input type="img" name="switch_active_status" value="true" src=<?php echo e(asset("/images/icon_close.gif")); ?> alt="Activate Location" title="Activate Location" width="10" height="10" border="0" />
+                                <img src=<?php echo e(asset("/images/icon_close.gif")); ?> alt="Activate Location" title="Activate Location" width="10" height="10" border="0" />
                                 <?php endif; ?>
-                            </a
+                            </a>
                         </td>
                     </form>
         </tr>
@@ -93,8 +94,8 @@
 </table>
 
 </table>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </script>
 </body>
 </html>

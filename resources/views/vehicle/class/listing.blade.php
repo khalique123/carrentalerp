@@ -7,7 +7,7 @@
             <td width="82%"  align="left" class="heading_1" style="padding-left:6px;">Vehicle Classes</td>
             <td width="18%"  align="left" class="link">
                 <div align="right" class="pas-txt">
-                    <a href="add_carclass.php?action=add">Add Vehicle Class</a>
+                    <a href="{{route('vehicle_class_create_route')}}">Add Vehicle Class</a>
                 </div>
             </td>
         </tr>

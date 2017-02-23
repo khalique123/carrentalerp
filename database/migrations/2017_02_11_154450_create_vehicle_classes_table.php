@@ -19,6 +19,7 @@ class CreateVehicleClassesTable extends Migration
             $table->increments('id');
             $table->string('name', 50)->unique();
             $table->longText('description')->nullable();
+            $table->integer('display_order');
             $table->integer('photo_id')->nullable();
             $table->boolean('is_active');
         });

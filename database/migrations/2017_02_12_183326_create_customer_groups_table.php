@@ -14,6 +14,7 @@ class CreateCustomerGroupsTable extends Migration
     public function up()
     {
         Schema::create('customer_groups', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name', 50);
             $table->longText('description');

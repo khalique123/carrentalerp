@@ -1,5 +1,5 @@
-@include('header')
-@include('leftpanel')
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -8,8 +8,9 @@
         </tr>
         <tr>
             <td width="10"valign="top" class="txt_1"  align="center">
-                <form  method="POST" action="{{route('vehicle_class_insert_route')}}" onsubmit="return check_carclass();"  style="padding-left:5px;" enctype="multipart/form-data">
-                    {{csrf_field()}}
+                <form  method="POST" action="<?php echo e(route('vehicle_class_insert_route')); ?>" onsubmit="return check_carclass();"  style="padding-left:5px;" enctype="multipart/form-data">
+                    <?php echo e(csrf_field()); ?>
+
                     <table width="100%" cellpadding="2" cellspacing="4" class="tab-border" bgcolor="#f3f3f3">
                         <tr>
                             <td colspan="6" style="padding-left:70px;">Fields marked with ' <span style="color:#8e2020; font-size:15px;">*</span> ' are mandatory.</td>
@@ -58,25 +59,25 @@
                                 <input type="hidden" name="ID" value="" />
                             </td>
                         </tr>
-                        @foreach($seasons as $season)
+                        <?php $__currentLoopData = $seasons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $season): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td  colspan="3" class="lp_title1"  style="text-align:center">
-                                <b>--------------------------------------------------{{$season->name}}--------------------------------------------------</b>
+                                <b>--------------------------------------------------<?php echo e($season->name); ?>--------------------------------------------------</b>
                             </td>
                         </tr>
-                        @foreach($pricing_types as $prcingType)
+                        <?php $__currentLoopData = $pricing_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prcingType): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td class="txt_1" style="text-align:right; width: 518px;">
-                                <b>{{$prcingType->name}} : <span style="color:#8e2020; font-size:15px;">*</span>
+                                <b><?php echo e($prcingType->name); ?> : <span style="color:#8e2020; font-size:15px;">*</span>
                                 </b>
                             </td>
                             <td>
-                                <input type="text" name="{{$season->name."::".$prcingType->name}}" id="span5" class="txtbox" value="0" />
+                                <input type="text" name="<?php echo e($season->name."::".$prcingType->name); ?>" id="span5" class="txtbox" value="0" />
                             </td>
                             <td>&nbsp; </td>
                         </tr>
-                        @endforeach
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td style="width: 518px">&nbsp;&nbsp;                                               </td>
                             <td>
@@ -100,7 +101,7 @@
 </table>
 </td>
 </tr>
-@include('footer')
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </table>
 
 </table>

@@ -38,5 +38,7 @@ class StaticDataSeeder extends Seeder
         $this->call(CurrenciesTableSeeder::class);
         //Seed the Vehicle table
         //$this->call(VehicleTableSeeder::class);
+        //Seed the Seasons table
+        $this->call(SeasonsTableSeeder::class);
     }
 }
