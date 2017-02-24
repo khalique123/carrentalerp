@@ -16,7 +16,7 @@ class CreateTransmissionsTable extends Migration
         Schema::create('transmissions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 20)->unique();
+            $table->string('name', 100)->unique();
             $table->longText('description')->nullable();
         });
     }
