@@ -31,6 +31,8 @@ Route::post('/password/update', 'Auth\ChangePasswordController@update')
 /*
 | Controller to control vehicles
 */
+Route::post('vehicle/form_submit', 'VehicleController@processInputBasedRequest')
+    ->name('vehicle_decision_route');
 Route::get('vehicle', 'VehicleController@index')
     ->name('vehicle_list_route');
 Route::get('vehicle/create', 'VehicleController@create')

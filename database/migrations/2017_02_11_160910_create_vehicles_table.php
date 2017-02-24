@@ -32,12 +32,13 @@ class CreateVehiclesTable extends Migration
             $table->integer('availability_id')->unsigned();
             $table->string('vehicle_location', 150)->nullable();
             $table->integer('branch_id')->unsigned();
-            $table->integer('vehicle_status_id')->unsigned();
+            //$table->integer('vehicle_status_id')->unsigned();
             $table->tinyInteger('passenger_capacity')->unsigned()->nullable();
             $table->tinyInteger('baggage_capacity')->unsigned()->nullable();
             $table->tinyInteger('number_of_doors')->unsigned()->nullable();
             $table->boolean('is_air_conditioned')->nullable();
             $table->integer('display_order');
+            $table->string('vin', 100)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

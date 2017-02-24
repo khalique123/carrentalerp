@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
 
-class TransmissionsTableSeeder extends Seeder
+class BranchesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +13,10 @@ class TransmissionsTableSeeder extends Seeder
     {
         Eloquent::unguard();
 
-        $path = "database/seeds/static_data/data/transmissions_seeder.sql";
+        $path = 'database/seeds/static_data/data/branches_seeder.sql';
         $output = shell_exec('cat '.$path);
         DB::unprepared($output);
         
-        $this->command->info('Transmissions table seeded!');
+        $this->command->info('Branches table seeded!');
     }
 }

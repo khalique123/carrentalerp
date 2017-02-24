@@ -158,7 +158,7 @@
                                                                     <b>Availability:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="av-txt_c"><?php echo e($vehicle->availabilty->name); ?></span>
+                                                                    <span class="av-txt_c"><?php echo e($vehicle->availabilty['name']); ?></span>
                                                                 </td>
                                                             </tr>
                                                         </table>
