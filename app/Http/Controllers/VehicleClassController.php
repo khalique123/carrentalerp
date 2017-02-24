@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\VehicleClass;
-use App\Vehicle;
 use App\Season;
+use App\DefaultPrice;
 use App\PricingType;
 use Validator;
 use Illuminate\Support\Facades\Input;
@@ -46,7 +47,12 @@ class VehicleClassController extends Controller {
             return VehicleClassController::destroy($request->id);
         } else if ($request->has('deactivate')) {
             $vehicleClass = VehicleClass::find($request->id);
-            $vehicleClass->is_active = TRUE;
+            if(0 === strcasecmp($request->deactivate, 'false')) {
+                $vehicleClass->is_active = FALSE;
+            }
+            else if(0 === strcasecmp($request->deactivate, 'true')) {
+                $vehicleClass->is_active = TRUE;
+            }
             $vehicleClass->save();
             return back();
         }
@@ -80,21 +86,21 @@ class VehicleClassController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'class_name' => 'required',
-            'class_desc' => 'required|email',
+            'class_desc' => 'required',
             'disp_order' => 'required',
             'class_image' => 'url',
         );
+
         $seasons = Season::all();
         $pricing_types = PricingType::all();
 
         foreach ($seasons as $season) {
             foreach ($pricing_types as $pricingType) {
-                $rules[$season . '::' . $pricingType] = 'numeric';
+                $rules[$season->id . '::' . $pricingType->id] = 'required|numeric';
             }
         }
 
@@ -105,27 +111,29 @@ class VehicleClassController extends Controller {
             return back()->withErrors($validator)
                             ->withInput();
         } else {
-            // store
-            $vehicleClass = new VehicleClass;
-            $vehicleClass->name = Input::get('class_name');
-            $vehicleClass->description = Input::get('class_desc');
-            $vehicleClass->display_order = Input::get('disp_order');
-            $vehicleClass->image_url = Input::get('class_image');
+            DB::transaction(function () use ($seasons, $pricing_types, $request) {
+                // store
+                $vehicleClass = new VehicleClass;
+                $vehicleClass->name = Input::get('class_name');
+                $vehicleClass->description = Input::get('class_desc');
+                $vehicleClass->display_order = Input::get('disp_order');
+                $vehicleClass->photo_id = Input::get('class_image');
+                $vehicleClass->is_active = 1;
 
-            foreach ($seasons as $season) {
-                foreach ($pricing_types as $pricingType) {
-                    $prices = $vehicleClass->prices;
-                    $input = explode('::', Input::get($season . '::' . $pricingType . '_id'));
-                    if ($request->has($season . '::' . $pricingType . '_id')) {
-                        $prices->pricing_type = $pricingType;
-                        $prices->pricing_season_id = $season;
-                        $prices->rate = Input::get($season . '::' . $pricingType);
+                $vehicleClass->save();
+                foreach ($seasons as $season) {
+                    foreach ($pricing_types as $pricingType) {
+                        $prices = new DefaultPrice;
+
+                        if ($request->has($season->id . '::' . $pricingType->id)) {
+                            $prices->pricing_type_id = $pricingType->id;
+                            $prices->pricing_season_id = $season->id;
+                            $prices->rate = Input::get($season->id . '::' . $pricingType->id);
+                            $vehicleClass->prices()->save($prices);
+                        }
                     }
                 }
-            }
-
-            $vehicleClass->save();
-            
+            });
             return redirect()->route('vehicle_class_list_route');
         }
     }
@@ -137,48 +145,10 @@ class VehicleClassController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'id' => 'required|digits_between:0,1000000'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return back()
-                            ->withErrors($validator);
-        } else {
-            $vehicleInfo = Vehicle::where('id', '=', $id)->first();
-
-            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => '']);
-        }
-    }
-
-    /**
-     * Display the specified vechicles available between the specified times.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function search($from, $to, $class = "All", $location = "All", $branch = "All") {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'from' => 'required',
-            'to' => 'required'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return back()
-                            ->withErrors($validator);
-        } else {
-            $vehicleInfo = Vehicle::where('id', '=', $id);
-
-            return redirect()->route('vehicle_show_route', ['vehicle_info' => $vehicleInfo, 'message' => '']);
-        }
+        $vehicleClassInfo = VehicleClass::where('id', '=', $id)->first();
+        $seasons = Season::all();
+        $pricingTypes = PricingType::all();
+        return view('/vehicle/class/show', ['vehicle_class_info' => $vehicleClassInfo, 'seasons' => $seasons, 'pricing_types' => $pricingTypes]);
     }
 
     /**
@@ -188,22 +158,10 @@ class VehicleClassController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'id' => 'required|digits_between:0,1000000'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return back()
-                            ->withErrors($validator);
-        } else {
-            $vehicleClass = VehicleClass::find($id);
-
-            return view('/vehicle/class/edit', ['vehicle_class' => $vehicleClass]);
-        }
+        $seasons = Season::all();
+        $pricing_types = PricingType::all();
+        $vehicleClass = VehicleClass::find($id);
+        return view('/vehicle/class/edit', ['vehicle_class' => $vehicleClass, 'seasons' => $seasons, 'pricing_types' => $pricing_types]);
     }
 
     /**
@@ -214,42 +172,57 @@ class VehicleClassController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
+// validate
+// read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id' => 'required|digits_between:0,1000000'
+            'class_name' => 'required',
+            'class_desc' => 'required',
+            'disp_order' => 'required',
+            'class_image' => 'url',
         );
+        $seasons = Season::all();
+        $pricing_types = PricingType::all();
+
+        foreach ($seasons as $season) {
+            foreach ($pricing_types as $pricingType) {
+                $rules[$season->id . '::' . $pricingType->id] = 'required|numeric';
+                $rules[$season->id . '::' . $pricingType->id . '::id'] = 'required|numeric';
+            }
+        }
+
         $validator = Validator::make(Input::all(), $rules);
 
-        // process the login
+// process the login
         if ($validator->fails()) {
-            return back()
-                            ->withErrors($validator);
+            return back()->withErrors($validator)
+                            ->withInput();
         } else {
-            // store
-            $vehicle = Vehicle::where('id', $id)->first();
+            DB::transaction(function () use ($seasons, $pricing_types, $request) {
+                // store
+                $vehicleClass = VehicleClass::where('id', '=', Input::get('vehicle_class_id'))->first();
+                $vehicleClass->name = Input::get('class_name');
+                $vehicleClass->description = Input::get('class_desc');
+                $vehicleClass->display_order = Input::get('disp_order');
+                $vehicleClass->photo_id = Input::get('class_image');
+                $vehicleClass->is_active = 1;
 
-            $vehicle->reg_number = Input::get('reg_number');
-            $vehicle->chassis_number = Input::get('chassis_number');
-            $vehicle->engine_number = Input::get('engine_number');
-            $vehicle->make = Input::get('make');
-            $vehicle->model = Input::get('model');
-            $vehicle->manu_year = Input::get('manu_year');
-            $vehicle->color = Input::get('color');
-            $vehicle->vehicle_class_id = Input::get('vehicle_class_id');
-            $vehicle->weight = Input::get('weight');
-            $vehicle->transmission_id = Input::get('transmission_id');
-            $vehicle->description = Input::get('description');
-            $vehicle->fuel_id = Input::get('fuel_id');
-            $vehicle->availability_id = Input::get('availability_id');
-            $vehicle->vehicle_location = Input::get('vehicle_location');
-            $vehicle->branch_id = Input::get('branch_id');
-            $vehicle->vehicle_status_id = Input::get('vehicle_status_id');
-            $vehicle->save();
+                $vehicleClass->save();
+                foreach ($seasons as $season) {
+                    foreach ($pricing_types as $pricingType) {
+                        $prices = $vehicleClass->prices->where('pricing_type_id', '=', $pricingType->id)
+                                        ->where('pricing_season_id', '=', $season->id)->first();
 
-            $vehicleInfo = Vehicle::where('id', $id)->first();
+                        if ($request->has($season->id . '::' . $pricingType->id)) {
+                            $prices->pricing_type_id = $pricingType->id;
+                            $prices->pricing_season_id = $season->id;
+                            $prices->rate = Input::get($season->id . '::' . $pricingType->id);
+                            $vehicleClass->prices()->save($prices);
+                        }
+                    }
+                }
+            });
 
-            return view('show_vehicle', ['vehicle_info' => $vehicleInfo, 'message' => 'Vehicle Info updated successfully.']);
+            return redirect()->route('vehicle_class_list_route');
         }
     }
 
@@ -260,23 +233,17 @@ class VehicleClassController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'id' => 'required|digits_between:0,1000000'
-        );
-        $validator = Validator::make(Input::all(), $rules);
+        DB::transaction(function () use ($id) {
+            $vehicleClass = VehicleClass::where('id', $id)->first();
+            $prices = $vehicleClass->prices;
 
-        // process the login
-        if ($validator->fails()) {
-            return back()
-                            ->withErrors($validator);
-        } else {
-            $vehicleClass = VehicleClass::where('id', $id);
+            foreach ($prices as $price) {
+                $price->delete();
+            }
+
             $vehicleClass->delete();
-
-            return redirect()->route('vehicle_class_list_route');
-        }
+        });
+        return redirect()->route('vehicle_class_list_route');
     }
 
 }

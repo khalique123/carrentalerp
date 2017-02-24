@@ -44,45 +44,42 @@
                             <div align="center" class="con-txt-3">Action</div>
                         </td>
                     </tr>
-                    <?php $__currentLoopData = $vehicle_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vechicleClass): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <form id="vehicle-class-<?php echo e($vechicleClass->id); ?>" action="<?php echo e(route('vehicle_class_decision_route')); ?>" method="POST" style="display: none;">
+                    <?php $__currentLoopData = $vehicle_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicleClass): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <form id="vehicle-class-<?php echo e($vehicleClass->id); ?>" action="<?php echo e(route('vehicle_class_decision_route')); ?>" method="POST" style="display: none;">
                         <?php echo e(csrf_field()); ?>
 
-                        <input type="hidden" name="id" value="<?php echo e($vechicleClass->id); ?>"/>
+                        <input type="hidden" name="id" value="<?php echo e($vehicleClass->id); ?>"/>
                         <tr bgcolor="#FFFFFF">
                             <td bgcolor="#FFFFFF" style="padding-left:5px;" class="txt_1">
-                                <div align="left"  class="con-txt"><?php echo e($vechicleClass->name); ?></div>
+                                <div align="left"  class="con-txt"><?php echo e($vehicleClass->name); ?></div>
                             </td>
                             <td bgcolor="#FFFFFF" style="padding-left:5px;" class="txt_1">
-                                <div align="left"  class="con-txt"><?php echo e($vechicleClass->description); ?></div>
+                                <div align="left"  class="con-txt"><?php echo e($vehicleClass->description); ?></div>
                             </td>
-                            <td bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;"><?php echo e($vechicleClass->display_order); ?></td>
+                            <td bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;"><?php echo e($vehicleClass->display_order); ?></td>
                             <td width="12%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                                 <div align="center" class="txt">
                                     <b>
-                                        <a href="<?php echo e(route('vehicle_class_show_route', ['id' => $vechicleClass->id])); ?>" >Details</a>
+                                        <a href="<?php echo e(route('vehicle_class_show_route', ['id' => $vehicleClass->id])); ?>" >Details</a>
                                     </b>&nbsp;</div>
                             </td>
                             <td width="12%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                                 <div align="center" class="txt">
                                     <b>
-                                        <a href="<?php echo e(route('vehicle_class_edit_route', ['id' => $vechicleClass->id])); ?>" >Edit</a>
+                                        <a href="<?php echo e(route('vehicle_class_edit_route', ['id' => $vehicleClass->id])); ?>" >Edit</a>
                                     </b>&nbsp;</div>
                             </td>
-                            <td width="11%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
+                            <td width="12%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                                 <div align="center" class="txt-2">
-                                    <b>
-                                        <button type="submit" href=#  name="delete" onclick="javascript:return confirm('Are you sure?')" value="true">Delete</button>
-                                    </b>&nbsp;</div>
+                                    <b><button type="submit"  name="delete" value="<?php echo e($vehicleClass->id); ?>" onclick="javascript:return confirm('Are you sure?')" >Delete</button></b>&nbsp;
+                                </div>
                             </td>
-                            <td width="10%"  align="center" bgcolor="#FFFFFF" >
-                                <a type=submit" href=# name="deactivate" value="true">
-                                    <?php if($vechicleClass->is_active == 1): ?>
-                                    <img src="images/icon_active.gif" alt="Deactivate Vehicle Class" title="Deactivate Vehicle Class" width="10" height="10" border="0" />
-                                    <?php else: ?>
-                                    <img src=<?php echo e(asset("/images/icon_close.gif")); ?> alt="Activate Vehicle Class" title="Activate Vehicle Class" width="10" height="10" border="0" />
-                                    <?php endif; ?>
-                                </a>
+                            <td colspan="6" width="6%"  align="center" bgcolor="#FFFFFF" >
+                                <?php if($vehicleClass->is_active === 1): ?>
+                                <button type="submit" name="deactivate" value="false"><img src="<?php echo e(asset('images/icon_active.gif')); ?>" alt="Deactivate Vehicle Class" title="Deactivate Vehicle Class" width="10" height="10" border="0" /></button>
+                                <?php else: ?>
+                                <button type="submit" name="deactivate" value="true"><img src="<?php echo e(asset('images/icon_close.gif')); ?>" alt="Activate Vehicle Class" title="Activate Vehicle Class" width="10" height="10" border="0" /></button>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     </form>

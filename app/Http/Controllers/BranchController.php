@@ -43,15 +43,15 @@ class BranchController extends Controller {
         }
         
         //this is meant to handle only one request at a time not both
-        if ($request->has('delete') && $request->has('switch_active_status')) {
+        if ($request->has('delete') && $request->has('deactivate')) {
             return back();
         } else if ($request->has('delete')) {
             BranchController::destroy($request->id);
-        } else if ($request->has('switch_active_status')) {
+        } else if ($request->has('deactivate')) {
             $branch = Branch::find($request->id);
-            if (strcasecmp('true', $request->get('switch_active_status'))) {
+            if (0 === strcasecmp('true', $request->get('deactivate'))) {
                 $branch->is_active = TRUE;
-            } else if (strcasecmp('false', $request->get('switch_active_status'))) {
+            } else if (0 === strcasecmp('false', $request->get('deactivate'))) {
                 $branch->is_active = FALSE;
             }
             $branch->save();

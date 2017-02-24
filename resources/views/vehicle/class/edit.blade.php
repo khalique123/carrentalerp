@@ -1,5 +1,5 @@
-<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@include('header')
+@include('leftpanel')
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -8,9 +8,9 @@
         </tr>
         <tr>
             <td width="10"valign="top" class="txt_1"  align="center">
-                <form  method="POST" action="<?php echo e(route('vehicle_class_insert_route')); ?>" onsubmit="return check_carclass();"  style="padding-left:5px;" enctype="multipart/form-data">
-                    <?php echo e(csrf_field()); ?>
-
+                <form  method="POST" action="{{route('vehicle_class_update_route', ['id' => $vehicle_class->id])}}" onsubmit="return check_carclass();"  style="padding-left:5px;" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    {{method_field('PUT')}}
                     <table width="100%" cellpadding="2" cellspacing="4" class="tab-border" bgcolor="#f3f3f3">
                         <tr>
                             <td colspan="6" style="padding-left:70px;">Fields marked with ' <span style="color:#8e2020; font-size:15px;">*</span> ' are mandatory.</td>
@@ -21,7 +21,7 @@
                                 </b>
                             </td>
                             <td width="50" >
-                                <input size="20"type="text" name="class_name" id="class_name" class="txtbox" value="" style="width: 237px" />
+                                <input size="20"type="text" name="class_name" id="class_name" class="txtbox" value="{{$vehicle_class->name}}" style="width: 237px" />
                             </td>																								<td width="5%">&nbsp;</td>
                         </tr>
                         <tr>
@@ -30,7 +30,7 @@
                                 </b>
                             </td>
                             <td>
-                                <textarea rows="5" name="class_desc" id="class_desc" style="width: 238px"></textarea>
+                                <textarea rows="5" name="class_desc" id="class_desc" style="width: 238px">{{$vehicle_class->description}}</textarea>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -40,10 +40,7 @@
                                 </b>
                             </td>
                             <td>
-                                <input type="text" name="disp_order" id="disp_order" class="txtbox" value="" />
-                            </td>
-                            <td>
-                                <input type="hidden" name="ID" value="" />
+                                <input type="text" name="disp_order" id="disp_order" class="txtbox" value="{{$vehicle_class->display_order}}" />
                             </td>
                         </tr>
                         <tr>
@@ -53,38 +50,41 @@
                             </td>
                             <td>
                                 <input type="file" name="class_image"  class="txtbox"/>
-                                <img src="../car_class_image/thumb/?1487083567">
+                                <img src="{{$vehicle_class->image_url}}">
                             </td>
                             <td>
-                                <input type="hidden" name="ID" value="" />
+                                <input type="hidden" name="vehicle_class_id" value="{{$vehicle_class->id}}" />
                             </td>
                         </tr>
-                        <?php $__currentLoopData = $seasons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $season): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        @foreach($seasons as $season)
                         <tr>
                             <td  colspan="3" class="lp_title1"  style="text-align:center">
-                                <b>--------------------------------------------------<?php echo e($season->name); ?>--------------------------------------------------</b>
+                                <b>--------------------------------------------------{{$season->name}}--------------------------------------------------</b>
                             </td>
                         </tr>
-                        <?php $__currentLoopData = $pricing_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prcingType): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        @foreach($pricing_types as $pricingType)
                         <tr>
                             <td class="txt_1" style="text-align:right; width: 518px;">
-                                <b><?php echo e($prcingType->name); ?> : <span style="color:#8e2020; font-size:15px;">*</span>
+                                <b>{{$pricingType->name}} : <span style="color:#8e2020; font-size:15px;">*</span>
                                 </b>
                             </td>
                             <td>
-                                <input type="text" name="<?php echo e($season->id."::".$prcingType->id); ?>" id="span5" class="txtbox" value="0.00" />
+                                <input type="text" name="{{$season->id.'::'.$pricingType->id}}" id="span5" class="txtbox" value="
+                                       {{$vehicle_class->prices()->where('pricing_type_id', '=', $pricingType->id)->where('pricing_season_id', '=', $season->id)->first()['rate']}}" />
+                            </td>
+                            <td>
+                                <input type="hidden" name="{{$season->id.'::'.$pricingType->id.'::id'}}" id="span5" class="txtbox" value="{{$vehicle_class->prices()->where('pricing_type_id', '=', $pricingType->id)
+                                ->where('pricing_season_id', '=', $season->id)->first()['id']}}" />
                             </td>
                             <td>&nbsp; </td>
                         </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        @endforeach
+                        @endforeach
                         <tr>
-                            <td style="width: 518px">&nbsp;&nbsp;</td>
-                            <td>
-                                <input type="submit" name="add_class" id="sub_but" value="Add" class="btn_1" />
-                            </td>
+                            <td style="width: 518px">&nbsp;&nbsp;                                               </td>
                             <td>
                                 <input type="hidden" name="ID" value="" />
+                                <input type="submit" name="add_class" id="sub_but" value="Save & Continue" class="btn_1" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -103,7 +103,7 @@
 </table>
 </td>
 </tr>
-<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@include('footer')
 </table>
 
 </table>

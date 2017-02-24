@@ -44,35 +44,34 @@
                     </tr>
                     @foreach($branches as $branch)
                     <tr bgcolor="#FFFFFF">
-                    <form id="branch-{{$branch->id}}" action="{{ route('branch_decision_route') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
+                    <form  method="POST" action="{{route('branch_decision_route')}}"  style="padding-left:5px;">
+                        {{csrf_field()}}
                         <input type="hidden" name="id" value="{{$branch->id}}"/>
-                        <td bgcolor="#FFFFFF" style="padding-left:5px;" class="txt_1">
-                            <div align="center" class="con-txt">
-                                <a href="{{route('branch_show_route', ['id' => $branch->id])}}">{{$branch->name}}</a>
-                            </div>
-                        </td>
-                        <td bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;">{{$branch->display_order}}</td>
+                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="padding-left:5px;">{{$branch->display_order}}</td>
+                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;">{{$branch->display_order}}</td>
                         <td width="15%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
+                            <div align="center" class="txt">
+                                <b>
+                                    <a href="{{route('branch_show_route', ['id' => $branch->id])}}"  >View Details</a>
+                                </b>&nbsp;</div>
+                        </td>
+                        <td width="5%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt">
                                 <b>
                                     <a href="{{route('branch_edit_route', ['id' => $branch->id])}}"  >Edit</a>
                                 </b>&nbsp;</div>
                         </td>
-                        <td width="16%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
+                        <td width="12%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt-2">
-                                <b> 
-                                    <button type="submit" href="#"  name="delete" onclick="javascript:return confirm('Are you sure?')" value="true">Delete</button>
-                                </b>&nbsp;</div>
+                                <b><button type="submit"  name="delete" value="{{$branch->id}}" onclick="javascript:return confirm('Are you sure?')" >Delete</button></b>&nbsp;
+                            </div>
                         </td>
-                        <td width="15%"  align="center" bgcolor="#FFFFFF" >
-                            <a href=# onclick="$(this).closest('form').submit()" name="deactivate" value=@if($branch->is_active == 1) "false" @else "true" @endif>
-                                @if($branch->is_active == 1)
-                                <img src={{asset("/images/icon_active.gif")}} alt="Deactivate Location" title="Deactivate Location" width="10" height="10" border="0" />
-                                @else
-                                <img src={{asset("/images/icon_close.gif")}} alt="Activate Location" title="Activate Location" width="10" height="10" border="0" />
-                                @endif
-                            </a>
+                        <td colspan="6" width="6%"  align="center" bgcolor="#FFFFFF" >
+                            @if($branch->is_active === 1)
+                            <button type="submit" name="deactivate" value="false"><img src="{{asset('images/icon_active.gif')}}" alt="Deactivate Branch" title="Deactivate Branch" width="10" height="10" border="0" /></button>
+                            @else
+                            <button type="submit" name="deactivate" value="true"><img src="{{asset('images/icon_close.gif')}}" alt="Activate Branch" title="Activate Branch" width="10" height="10" border="0" /></button>
+                            @endif
                         </td>
                     </form>
         </tr>

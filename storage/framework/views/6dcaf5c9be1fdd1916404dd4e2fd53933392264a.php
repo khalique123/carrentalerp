@@ -44,36 +44,35 @@
                     </tr>
                     <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr bgcolor="#FFFFFF">
-                    <form id="branch-<?php echo e($branch->id); ?>" action="<?php echo e(route('branch_decision_route')); ?>" method="POST" style="display: none;">
+                    <form  method="POST" action="<?php echo e(route('branch_decision_route')); ?>"  style="padding-left:5px;">
                         <?php echo e(csrf_field()); ?>
 
                         <input type="hidden" name="id" value="<?php echo e($branch->id); ?>"/>
-                        <td bgcolor="#FFFFFF" style="padding-left:5px;" class="txt_1">
-                            <div align="center" class="con-txt">
-                                <a href="<?php echo e(route('branch_show_route', ['id' => $branch->id])); ?>"><?php echo e($branch->name); ?></a>
-                            </div>
-                        </td>
-                        <td bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;"><?php echo e($branch->display_order); ?></td>
+                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="padding-left:5px;"><?php echo e($branch->display_order); ?></td>
+                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;"><?php echo e($branch->display_order); ?></td>
                         <td width="15%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
+                            <div align="center" class="txt">
+                                <b>
+                                    <a href="<?php echo e(route('branch_show_route', ['id' => $branch->id])); ?>"  >View Details</a>
+                                </b>&nbsp;</div>
+                        </td>
+                        <td width="5%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt">
                                 <b>
                                     <a href="<?php echo e(route('branch_edit_route', ['id' => $branch->id])); ?>"  >Edit</a>
                                 </b>&nbsp;</div>
                         </td>
-                        <td width="16%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
+                        <td width="12%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt-2">
-                                <b> 
-                                    <button type="submit" href="#"  name="delete" onclick="javascript:return confirm('Are you sure?')" value="true">Delete</button>
-                                </b>&nbsp;</div>
+                                <b><button type="submit"  name="delete" value="<?php echo e($branch->id); ?>" onclick="javascript:return confirm('Are you sure?')" >Delete</button></b>&nbsp;
+                            </div>
                         </td>
-                        <td width="15%"  align="center" bgcolor="#FFFFFF" >
-                            <a href=# onclick="$(this).closest('form').submit()" name="deactivate" value=<?php if($branch->is_active == 1): ?> "false" <?php else: ?> "true" <?php endif; ?>>
-                                <?php if($branch->is_active == 1): ?>
-                                <img src=<?php echo e(asset("/images/icon_active.gif")); ?> alt="Deactivate Location" title="Deactivate Location" width="10" height="10" border="0" />
-                                <?php else: ?>
-                                <img src=<?php echo e(asset("/images/icon_close.gif")); ?> alt="Activate Location" title="Activate Location" width="10" height="10" border="0" />
-                                <?php endif; ?>
-                            </a>
+                        <td colspan="6" width="6%"  align="center" bgcolor="#FFFFFF" >
+                            <?php if($branch->is_active === 1): ?>
+                            <button type="submit" name="deactivate" value="false"><img src="<?php echo e(asset('images/icon_active.gif')); ?>" alt="Deactivate Branch" title="Deactivate Branch" width="10" height="10" border="0" /></button>
+                            <?php else: ?>
+                            <button type="submit" name="deactivate" value="true"><img src="<?php echo e(asset('images/icon_close.gif')); ?>" alt="Activate Branch" title="Activate Branch" width="10" height="10" border="0" /></button>
+                            <?php endif; ?>
                         </td>
                     </form>
         </tr>
@@ -94,8 +93,8 @@
 </table>
 
 </table>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </script>
 </body>
 </html>

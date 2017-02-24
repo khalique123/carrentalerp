@@ -54,22 +54,6 @@ class User extends Authenticatable
     }
     
     /**
-     * Get the state in which user is located
-     */
-    public function state()
-    {
-        return $this->city()->state();
-    }
-    
-    /**
-     * Get the country in which user is located
-     */
-    public function country()
-    {
-        return $this->city()->state()->country();
-    }
-    
-    /**
      * Get all of the users photos.
      */
     public function photos()

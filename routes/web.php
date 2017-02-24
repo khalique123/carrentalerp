@@ -109,3 +109,29 @@ Route::put('vehicle_class/{id}', 'VehicleClassController@update')
 Route::delete('vehicle_class/{id}', 'VehicleClassController@destroy')
     ->where('id', '[0-9]+')
     ->name('vehicle_class_delete_route');
+
+
+/*
+* Season related routes
+*   
+*/
+Route::post('season/form_submit', 'SeasonController@processInputBasedRequest')
+    ->name('season_decision_route');
+Route::get('season', 'SeasonController@index')
+    ->name('season_list_route');
+Route::get('season/create', 'SeasonController@create')
+    ->name('season_create_route');
+Route::post('season', 'SeasonController@store')
+    ->name('season_insert_route');
+Route::get('season/{id}', 'SeasonController@show')
+    ->where('id', '[0-9]+')
+    ->name('season_show_route');
+Route::get('season/{id}/edit', 'SeasonController@edit')
+    ->where('id', '[0-9]+')
+    ->name('season_edit_route');
+Route::put('season/{id}', 'SeasonController@update')
+    ->where('id', '[0-9]+')
+    ->name('season_update_route');
+Route::delete('season/{id}', 'SeasonController@destroy')
+    ->where('id', '[0-9]+')
+    ->name('season_delete_route');

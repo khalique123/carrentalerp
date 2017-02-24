@@ -14,4 +14,12 @@ class PricingType extends Model
     {
         return $this->hasMany('App\BookingPrice','pricing_type_id', 'id');
     }
+    
+    /**
+     * Get  the default prices associated with the pricing type.
+     */
+    public function defaultPrices()
+    {
+        return $this->hasMany('App\DefaultPrice', 'pricing_type_id', 'id');
+    }
 }

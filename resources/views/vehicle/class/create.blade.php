@@ -71,17 +71,19 @@
                                 </b>
                             </td>
                             <td>
-                                <input type="text" name="{{$season->name."::".$prcingType->name}}" id="span5" class="txtbox" value="0" />
+                                <input type="text" name="{{$season->id."::".$prcingType->id}}" id="span5" class="txtbox" value="0.00" />
                             </td>
                             <td>&nbsp; </td>
                         </tr>
                         @endforeach
                         @endforeach
                         <tr>
-                            <td style="width: 518px">&nbsp;&nbsp;                                               </td>
+                            <td style="width: 518px">&nbsp;&nbsp;</td>
+                            <td>
+                                <input type="submit" name="add_class" id="sub_but" value="Add" class="btn_1" />
+                            </td>
                             <td>
                                 <input type="hidden" name="ID" value="" />
-                                <input type="submit" name="add_class" id="sub_but" value="Add" class="btn_1" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>

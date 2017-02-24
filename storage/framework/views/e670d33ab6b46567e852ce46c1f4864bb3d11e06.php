@@ -86,8 +86,8 @@
 
                 <td bgcolor="#F4F4F4" style="padding:0px 20px; border:1px solid #e0e0e0;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                                  <tr>
-                    <td width="25%" align="left"><a href="manage_season.php"><img src="images/icon_season.gif" alt="Manage Season" width="29" height="28" border="0" /></a></td>
-                    <td width="75%" class="index_link"><a href="manage_season.php">Rental Seasons</a></td>
+                    <td width="25%" align="left"><a href="<?php echo e(route('season_list_route')); ?>"><img src="images/icon_season.gif" alt="Manage Season" width="29" height="28" border="0" /></a></td>
+                    <td width="75%" class="index_link"><a href="<?php echo e(route('season_list_route')); ?>">Rental Seasons</a></td>
                   </tr>
                    
                 </table></td>
