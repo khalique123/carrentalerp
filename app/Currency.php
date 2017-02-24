@@ -14,4 +14,12 @@ class Currency extends Model
     {
         return $this->hasMany('App\BookingPrice','currency_id');
     }
+    
+    /**
+     * Get the rental accessories associated with the currency
+     */
+    public function rentalAccessory()
+    {
+        return $this->hasMany('App\RentalAccessory','currency_id');
+    }
 }

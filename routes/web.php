@@ -135,3 +135,29 @@ Route::put('season/{id}', 'SeasonController@update')
 Route::delete('season/{id}', 'SeasonController@destroy')
     ->where('id', '[0-9]+')
     ->name('season_delete_route');
+
+
+/*
+* Rental accessories related routes
+*   
+*/
+Route::post('accessory/form_submit', 'RentalAccessoryController@processInputBasedRequest')
+    ->name('accessory_decision_route');
+Route::get('accessory', 'RentalAccessoryController@index')
+    ->name('accessory_list_route');
+Route::get('accessory/create', 'RentalAccessoryController@create')
+    ->name('accessory_create_route');
+Route::post('accessory', 'RentalAccessoryController@store')
+    ->name('accessory_insert_route');
+Route::get('accessory/{id}', 'RentalAccessoryController@show')
+    ->where('id', '[0-9]+')
+    ->name('accessory_show_route');
+Route::get('accessory/{id}/edit', 'RentalAccessoryController@edit')
+    ->where('id', '[0-9]+')
+    ->name('accessory_edit_route');
+Route::put('accessory/{id}', 'RentalAccessoryController@update')
+    ->where('id', '[0-9]+')
+    ->name('accessory_update_route');
+Route::delete('accessory/{id}', 'RentalAccessoryController@destroy')
+    ->where('id', '[0-9]+')
+    ->name('accessory_delete_route');

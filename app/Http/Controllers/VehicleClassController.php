@@ -31,7 +31,7 @@ class VehicleClassController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id' => 'required|numeric',
+            'id' => 'exists:vehicle_classes, id',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -41,16 +41,16 @@ class VehicleClassController extends Controller {
         }
 
         //this is meant to handle only one request at a time not both
-        if ($request->has('delete') && $request->has('deactivate')) {
+        if ($request->has('delete') && $request->has('status_change')) {
             return back();
         } else if ($request->has('delete')) {
             return VehicleClassController::destroy($request->id);
-        } else if ($request->has('deactivate')) {
+        } else if ($request->has('status_change')) {
             $vehicleClass = VehicleClass::find($request->id);
-            if(0 === strcasecmp($request->deactivate, 'false')) {
+            if(0 === strcasecmp($request->status_change, 'false')) {
                 $vehicleClass->is_active = FALSE;
             }
-            else if(0 === strcasecmp($request->deactivate, 'true')) {
+            else if(0 === strcasecmp($request->status_change, 'true')) {
                 $vehicleClass->is_active = TRUE;
             }
             $vehicleClass->save();

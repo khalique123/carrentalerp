@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Season;
+use App\RentalAccessory;
+use App\Currency;
+use App\PricingType;
 use Validator;
 use Illuminate\Support\Facades\Input;
 
-class SeasonController extends Controller {
+class RentalAccessoryController extends Controller {
 
     /**
      * only when logged in
@@ -28,7 +31,7 @@ class SeasonController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id' => 'exists:seasons,id',
+            'id' => 'exists:rental_accessories,id',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -37,23 +40,11 @@ class SeasonController extends Controller {
             return back();
         }
 
-        //this is meant to handle only one request at a time not both
-        if ($request->has('delete') && $request->has('status_change')) {
-            return back();
-        } else if ($request->has('delete')) {
-            return SeasonController::destroy($request->id);
-            return back();
-        } else if ($request->has('status_change')) {
-            $season= Season::find($request->id);
-            if(0 === strcasecmp($request->status_change, 'false')) {
-                $season->is_active = FALSE;
-            }
-            else if(0 === strcasecmp($request->status_change, 'true')) {
-                $season->is_active = TRUE;
-            }
-            $season->save();
+        if ($request->has('delete')) {
+            return RentalAccessoryController::destroy($request->id);
             return back();
         }
+        //logic to handle any extra form submits goes here
     }
 
     /**
@@ -62,8 +53,8 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $seasons = Season::all();
-        return view('/rental/seasons/listing', ['seasons' => $seasons]);
+        $rentalAccessories = RentalAccessory::all();
+        return view('/rental/accessories/listing', ['rental_accessories' => $rentalAccessories]);
     }
 
     /**
@@ -72,7 +63,9 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('/rental/seasons/create');
+        $pricingTypes = PricingType::all();
+        $currencies = Currency::all();
+        return view('/rental/accessories/create', ['pricing_types' => $pricingTypes, 'currencies' => $currencies]);
     }
 
     /**
@@ -85,11 +78,11 @@ class SeasonController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'season_name' => 'required',
-            'season_desc' => 'required',
-            'disp_order'  => 'required',
-            'start_date'  => 'date|before_or_equal:end_date',
-            'end_date'    => 'date|after_or_equal:start_date',
+            'code' => 'required',
+            'name' => 'required',
+            'taxable' => [Rule::in(['on', 'off'])],
+            'calculation' => 'required|exists:pricing_types,id',
+            'rate' => 'required|numeric',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -97,21 +90,20 @@ class SeasonController extends Controller {
         // process the login
         if ($validator->fails()) {
             return back()->withErrors($validator)
-                         ->withInput();
+                            ->withInput();
         } else {
             DB::transaction(function () use ($request) {
                 // store
-                $season = new Season;
-                $season->name           = Input::get('season_name');
-                $season->description    = Input::get('season_desc');
-                $season->display_order  = Input::get('disp_order');
-                $season->start_date     = Input::get('start_date');
-                $season->end_date       = Input::get('end_date');
-                $season->is_active      = FALSE;
+                $rentalAccessory = new RentalAccessory;
+                $rentalAccessory->name = Input::get('name');
+                $rentalAccessory->code = Input::get('code');
+                $rentalAccessory->is_taxable = Input::get('taxable') === 'on'? true : false;
+                $rentalAccessory->pricing_type_id = Input::get('calculation');
+                $rentalAccessory->rate = Input::get('rate');
 
-                $season->save();
+                $rentalAccessory->save();
             });
-            return redirect()->route('season_list_route');
+            return redirect()->route('accessory_list_route');
         }
     }
 
@@ -122,8 +114,8 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $season = Season::where('id', '=', $id)->first();
-        return view('/rental/seasons/show', ['season' => $season]);
+        $rentalAccessory = RentalAccessory::where('id', '=', $id)->first();
+        return view('/rental/accessories/show', ['rental_accessory' => $rentalAccessory]);
     }
 
     /**
@@ -133,8 +125,9 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $season = Season::find($id);
-        return view('/rental/seasons/edit', ['season' => $season]);
+        $pricingTypes = PricingType::all();
+        $rentalAccessory = RentalAccessory::find($id);
+        return view('/rental/accessories/edit', ['rental_accessory' => $rentalAccessory, 'pricing_types' => $pricingTypes]);
     }
 
     /**
@@ -148,11 +141,11 @@ class SeasonController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'season_name' => 'required',
-            'season_desc' => 'required',
-            'disp_order'  => 'required',
-            'start_date'  => 'date|before_or_equal:end_date',
-            'end_date'    => 'date|after_or_equal:start_date',
+            'code' => 'required',
+            'name' => 'required',
+            'taxable' => [Rule::in(['on', 'off'])],
+            'calculation' => 'required|exists:pricing_types,id',
+            'rate' => 'required|numeric',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -164,16 +157,16 @@ class SeasonController extends Controller {
         } else {
             DB::transaction(function () use ($request, $id) {
                 // store
-                $season = Season::find($id);
-                $season->name           = Input::get('season_name');
-                $season->description    = Input::get('season_desc');
-                $season->display_order  = Input::get('disp_order');
-                $season->start_date     = Input::get('start_date');
-                $season->end_date       = Input::get('end_date');
+                $rentalAccessory = RentalAccessory::find($id);
+                $rentalAccessory->name = Input::get('name');
+                $rentalAccessory->code = Input::get('code');
+                $rentalAccessory->is_taxable = Input::get('taxable') === 'on'? true : false;
+                $rentalAccessory->pricing_type_id = Input::get('calculation');
+                $rentalAccessory->rate = Input::get('rate');
 
-                $season->save();
+                $rentalAccessory->save();
             });
-            return redirect()->route('season_list_route');
+            return redirect()->route('accessory_list_route');
         }
     }
 
@@ -185,10 +178,10 @@ class SeasonController extends Controller {
      */
     public function destroy($id) {
         DB::transaction(function () use ($id) {
-            $season = Season::where('id', $id)->first();
+            $rentalAccessory = RentalAccessory::where('id', $id)->first();
 
-            $season->delete();
+            $rentalAccessory->delete();
         });
-        return redirect()->route('season_list_route');
+        return redirect()->route('accessory_list_route');
     }
 }

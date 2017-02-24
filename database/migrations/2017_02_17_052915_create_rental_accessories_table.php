@@ -16,11 +16,12 @@ class CreateRentalAccessoriesTable extends Migration
         Schema::create('rental_accessories', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('code', 50);
+            $table->string('code', 50)->unique();
             $table->string('name');
-            $table->integer('pricing_type');
-            $table->integer('rate');
-            $table->integer('currency_id');
+            $table->integer('pricing_type_id')->unsigned();
+            $table->float('rate', 8, 2);
+            $table->integer('currency_id')->unsigned()->nullable();
+            $table->boolean('is_taxable');
         });
     }
 

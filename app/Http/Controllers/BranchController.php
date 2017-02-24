@@ -33,7 +33,7 @@ class BranchController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id'       => 'required|numeric',
+            'id'       => 'exists:branches,id',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -43,15 +43,15 @@ class BranchController extends Controller {
         }
         
         //this is meant to handle only one request at a time not both
-        if ($request->has('delete') && $request->has('deactivate')) {
+        if ($request->has('delete') && $request->has('status_change')) {
             return back();
         } else if ($request->has('delete')) {
             BranchController::destroy($request->id);
-        } else if ($request->has('deactivate')) {
+        } else if ($request->has('status_change')) {
             $branch = Branch::find($request->id);
-            if (0 === strcasecmp('true', $request->get('deactivate'))) {
+            if (0 === strcasecmp('true', $request->get('status_change'))) {
                 $branch->is_active = TRUE;
-            } else if (0 === strcasecmp('false', $request->get('deactivate'))) {
+            } else if (0 === strcasecmp('false', $request->get('status_change'))) {
                 $branch->is_active = FALSE;
             }
             $branch->save();
@@ -67,7 +67,7 @@ class BranchController extends Controller {
      */
     public function index() {
         $branches = Branch::paginate(15);
-        return view('/branch/listing', ['branches' => $branches]);
+        return view('/company/branch/listing', ['branches' => $branches]);
     }
 
     /**
@@ -79,7 +79,7 @@ class BranchController extends Controller {
         $countries = Country::all();
         $states = State::limit(30)->offset(30)->get();
         $cities = City::limit(30)->offset(30)->get();
-        return view('/branch/create', ['countries' => $countries, 'states' => $states, 'cities' => $cities]);
+        return view('/company/branch/create', ['countries' => $countries, 'states' => $states, 'cities' => $cities]);
     }
 
     /**
@@ -133,7 +133,7 @@ class BranchController extends Controller {
      */
     public function show($id) {
         $branch = Branch::where('id', '=', $id)->first();
-        return view('/branch/show', ['branch' => $branch,]);
+        return view('/company/branch/show', ['branch' => $branch,]);
     }
 
     /**
@@ -147,7 +147,7 @@ class BranchController extends Controller {
         $countries = Country::all();
         $states = State::limit(30)->offset(30)->get();
         $cities = City::limit(30)->offset(30)->get();
-        return view('/branch/edit', ['countries' => $countries, 'states' => $states, 'cities' => $cities, 'branch' => $branch]);
+        return view('/company/branch/edit', ['countries' => $countries, 'states' => $states, 'cities' => $cities, 'branch' => $branch]);
     }
 
     /**

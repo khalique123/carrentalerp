@@ -1,5 +1,5 @@
-@include('header') 
-@include('leftpanel')
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
@@ -8,7 +8,7 @@
             <td width="82%"  align="left" class="heading_1" style="padding-left:6px;">Rental Locations    </td>
             <td width="18%"  align="left" class="link">
                 <div align="right" class="pas-txt">
-                    <a href={{route("branch_create_route")}}>Add Rental Location</a>
+                    <a href=<?php echo e(route("branch_create_route")); ?>>Add Rental Location</a>
                 </div>
             </td>
         </tr>
@@ -27,7 +27,7 @@
                     <tr>
                         <td colspan="25" align="right" bgcolor="#FFFFFF">
                             <div class="page-txt">
-                                <span class="proname">Page {{$branches->currentPage()}} of {{$branches->lastPage()}}&nbsp;</span>
+                                <span class="proname">Page <?php echo e($branches->currentPage()); ?> of <?php echo e($branches->lastPage()); ?>&nbsp;</span>
                             </div>
                         </td>
                     </tr>
@@ -42,40 +42,41 @@
                             <div align="center" class="con-txt-3">Action</div>
                         </td>
                     </tr>
-                    @foreach($branches as $branch)
+                    <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr bgcolor="#FFFFFF">
-                    <form  method="POST" action="{{route('branch_decision_route')}}"  style="padding-left:5px;">
-                        {{csrf_field()}}
-                        <input type="hidden" name="id" value="{{$branch->id}}"/>
-                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="padding-left:5px;">{{$branch->display_order}}</td>
-                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;">{{$branch->display_order}}</td>
+                    <form  method="POST" action="<?php echo e(route('branch_decision_route')); ?>"  style="padding-left:5px;">
+                        <?php echo e(csrf_field()); ?>
+
+                        <input type="hidden" name="id" value="<?php echo e($branch->id); ?>">
+                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="padding-left:5px;"><?php echo e($branch->display_order); ?></td>
+                        <td width="5%" bgcolor="#FFFFFF"  class="txt_1" style="text-align:center;"><?php echo e($branch->display_order); ?></td>
                         <td width="15%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt">
                                 <b>
-                                    <a href="{{route('branch_show_route', ['id' => $branch->id])}}"  >View Details</a>
+                                    <a href="<?php echo e(route('branch_show_route', ['id' => $branch->id])); ?>"  >View Details</a>
                                 </b>&nbsp;</div>
                         </td>
                         <td width="5%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt">
                                 <b>
-                                    <a href="{{route('branch_edit_route', ['id' => $branch->id])}}"  >Edit</a>
+                                    <a href="<?php echo e(route('branch_edit_route', ['id' => $branch->id])); ?>"  >Edit</a>
                                 </b>&nbsp;</div>
                         </td>
                         <td width="12%"  align="center" bgcolor="#FFFFFF"  class="link_1" >
                             <div align="center" class="txt-2">
-                                <b><button type="submit"  name="delete" value="{{$branch->id}}" onclick="javascript:return confirm('Are you sure?')" >Delete</button></b>&nbsp;
+                                <b><button type="submit"  name="delete" value="<?php echo e($branch->id); ?>" onclick="javascript:return confirm('Are you sure?')" >Delete</button></b>&nbsp;
                             </div>
                         </td>
                         <td colspan="6" width="6%"  align="center" bgcolor="#FFFFFF" >
-                            @if($branch->is_active === 1)
-                            <button type="submit" name="deactivate" value="false"><img src="{{asset('images/icon_active.gif')}}" alt="Deactivate Branch" title="Deactivate Branch" width="10" height="10" border="0" /></button>
-                            @else
-                            <button type="submit" name="deactivate" value="true"><img src="{{asset('images/icon_close.gif')}}" alt="Activate Branch" title="Activate Branch" width="10" height="10" border="0" /></button>
-                            @endif
+                            <?php if($branch->is_active === 1): ?>
+                            <button type="submit" name="status_change" value="false"><img src="<?php echo e(asset('images/icon_active.gif')); ?>" alt="Deactivate Branch" title="Deactivate Branch" width="10" height="10" border="0" /></button>
+                            <?php else: ?>
+                            <button type="submit" name="status_change" value="true"><img src="<?php echo e(asset('images/icon_close.gif')); ?>" alt="Activate Branch" title="Activate Branch" width="10" height="10" border="0" /></button>
+                            <?php endif; ?>
                         </td>
                     </form>
         </tr>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <tr>
             <td colspan="5" height="4" bgcolor="#659dba"/>
         </tr>
@@ -88,7 +89,7 @@
 </table>
 </td>
 </tr>
-@include('footer')
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </table>
 
 </table>

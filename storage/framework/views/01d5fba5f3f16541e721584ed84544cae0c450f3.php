@@ -1,5 +1,5 @@
-@include('header')
-@include('leftpanel')
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:0px solid #FF9933;">
@@ -7,7 +7,7 @@
             <td colspan="3" width="10%"  align="left" class="heading_1" style="padding-left:6px;"> Manage Vehicles</td>
             <td  width="18%"  align="left" class="link">
                 <div align="right" class="pas-txt">
-                    <a href="{{route('vehicle_create_route')}}">Add Vehicle</a>
+                    <a href="<?php echo e(route('vehicle_create_route')); ?>">Add Vehicle</a>
                 </div>
             </td>
         </tr>
@@ -103,7 +103,7 @@
                             <td colspan="2" height="1"/>
                         </tr>
                         <!--khalique!-->
-                        @foreach($vehicles as $vehicle)
+                        <?php $__currentLoopData = $vehicles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicle): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr bgcolor="#FFFFFF">
                             <td colspan="2" valign="top" bgcolor="#FFFFFF">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -134,7 +134,7 @@
                                                                     <b>Vehicle Code:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->vehicle_code}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->vehicle_code); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -142,7 +142,7 @@
                                                                     <b>License #:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->reg_number}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->reg_number); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -150,7 +150,7 @@
                                                                     <b>Class:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->vehicleClass->name}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->vehicleClass->name); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -158,7 +158,7 @@
                                                                     <b>Availability:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="av-txt_c">{{$vehicle->availabilty->name}}</span>
+                                                                    <span class="av-txt_c"><?php echo e($vehicle->availabilty->name); ?></span>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -170,7 +170,7 @@
                                                                     <b>Make:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->make}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->make); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -178,7 +178,7 @@
                                                                     <b>Model:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->model}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->model); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -186,7 +186,7 @@
                                                                     <b>Color:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->color}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->color); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -194,7 +194,7 @@
                                                                     <b>Year:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->manu_year}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->manu_year); ?></span>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -206,7 +206,7 @@
                                                                     <b>Transmission Type :</b>
                                                                 </td
                                                                 <td>
-                                                                    <span class="txt_1" style="text-align:center;">{{$vehicle->transmission->name}}</span>
+                                                                    <span class="txt_1" style="text-align:center;"><?php echo e($vehicle->transmission->name); ?></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -230,18 +230,18 @@
                                                                                 <img src="images/icon_door.jpg" alt="Doors" title="Doors" width="23" height="23" />
                                                                             </td>
                                                                             <td width="3"/>
-                                                                            @if($vehicle->is_air_conditioned)
+                                                                            <?php if($vehicle->is_air_conditioned): ?>
                                                                             <td>
                                                                                 <img src="images/icon_ac.jpg" alt="Air Conditioning" title="Air Conditioning" width="23" height="23" />
                                                                             </td>
-                                                                            @endif
+                                                                            <?php endif; ?>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td valign="top" class="txt_3">x {{$vehicle->passenger_capacity}}</td>
+                                                                            <td valign="top" class="txt_3">x <?php echo e($vehicle->passenger_capacity); ?></td>
                                                                             <td class="txt_3"/>
-                                                                            <td valign="top" class="txt_3">x {{$vehicle->baggage_capacity}}</td>
+                                                                            <td valign="top" class="txt_3">x <?php echo e($vehicle->baggage_capacity); ?></td>
                                                                             <td class="txt_3"/>
-                                                                            <td valign="top" class="txt_3">x {{$vehicle->number_of_doors}}</td>
+                                                                            <td valign="top" class="txt_3">x <?php echo e($vehicle->number_of_doors); ?></td>
                                                                             <td/>
                                                                             <td>&nbsp;</td>
                                                                         </tr>
@@ -255,7 +255,7 @@
                                                             <tr>
                                                                 <td   style="padding-left:15px;" class="txt_1">
                                                                     <b>Description</b>
-                                                                    <br />{{$vehicle->description}}																		</td>
+                                                                    <br /><?php echo e($vehicle->description); ?>																		</td>
                                                             </tr>
                                                         </table>
                                                     </td>
@@ -264,18 +264,19 @@
                                                     <td colspan="5" valign="top" bgcolor="#FFFFFF">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
-                                                                <form id="vehicle-{{$vehicle->id}}" action="{{ route('vehicle_decision_route') }}" method="POST" style="display: none;">
-                                                                {{ csrf_field() }}
+                                                                <form id="vehicle-<?php echo e($vehicle->id); ?>" action="<?php echo e(route('vehicle_decision_route')); ?>" method="POST" style="display: none;">
+                                                                <?php echo e(csrf_field()); ?>
+
                                                                 <td width="19%" valign="top">
                                                                     <span align="center" class="txt">
                                                                         <b>
-                                                                            <a href="{{route('vehicle_edit_route', ['id' => $vehicle->id])}}"  >Edit</a>
+                                                                            <a href="<?php echo e(route('vehicle_edit_route', ['id' => $vehicle->id])); ?>"  >Edit</a>
                                                                         </b>&nbsp;</span> | <span align="center" class="txt-2">
                                                                         <b>
-                                                                            <button type="submit" name="delete" value="{{$vehicle->id}}" onclick="javascript:return confirm('Are you sure?')" >Delete</button>
+                                                                            <button type="submit" name="delete" value="<?php echo e($vehicle->id); ?>" onclick="javascript:return confirm('Are you sure?')" >Delete</button>
                                                                         </b>&nbsp;</span> | <span align="center" class="txt-2">
                                                                         <b>
-                                                                            <a href="{{route('vehicle_show_route', ['id' => $vehicle->id])}}">Details</a>
+                                                                            <a href="<?php echo e(route('vehicle_show_route', ['id' => $vehicle->id])); ?>">Details</a>
                                                                         </b>&nbsp;</span>
                                                                 </td>
                                                                 <td width="4%" valign="top" style="padding-left:4px;"/>
@@ -293,7 +294,7 @@
                                 </table>
                             </td>
                         </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <!--khalique!-->
                     </table>
                 </td>
@@ -304,7 +305,7 @@
 </table>
 </td>
 </tr>
-@include('footer')
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </table>
 
 </table>

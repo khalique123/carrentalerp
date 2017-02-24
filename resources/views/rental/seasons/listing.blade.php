@@ -51,9 +51,9 @@
                         </td>
                         <td colspan="6" width="6%"  align="center" bgcolor="#FFFFFF" >
                             @if($season->is_active === 1)
-                            <button type="submit" name="deactivate" value="false"><img src="{{asset('images/icon_active.gif')}}" alt="Deactivate Season" title="Deactivate Season" width="10" height="10" border="0" /></button>
+                            <button type="submit" name="status_change" value="false"><img src="{{asset('images/icon_active.gif')}}" alt="Deactivate Season" title="Deactivate Season" width="10" height="10" border="0" /></button>
                             @else
-                            <button type="submit" name="deactivate" value="true"><img src="{{asset('images/icon_close.gif')}}" alt="Activate Season" title="Activate Season" width="10" height="10" border="0" /></button>
+                            <button type="submit" name="status_change" value="true"><img src="{{asset('images/icon_close.gif')}}" alt="Activate Season" title="Activate Season" width="10" height="10" border="0" /></button>
                             @endif
                         </td>
                         <input type="hidden" name="id" value="{{$season->id}}">

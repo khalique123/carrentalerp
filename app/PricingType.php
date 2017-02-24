@@ -22,4 +22,12 @@ class PricingType extends Model
     {
         return $this->hasMany('App\DefaultPrice', 'pricing_type_id', 'id');
     }
+    
+    /**
+     * Get the rental accessories associated with the pricing type
+     */
+    public function rentalAccessory()
+    {
+        return $this->hasMany('App\RentalAccessory','pricing_type_id');
+    }
 }

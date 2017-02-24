@@ -76,9 +76,9 @@
                             </td>
                             <td colspan="6" width="6%"  align="center" bgcolor="#FFFFFF" >
                                 <?php if($vehicleClass->is_active === 1): ?>
-                                <button type="submit" name="deactivate" value="false"><img src="<?php echo e(asset('images/icon_active.gif')); ?>" alt="Deactivate Vehicle Class" title="Deactivate Vehicle Class" width="10" height="10" border="0" /></button>
+                                <button type="submit" name="status_change" value="false"><img src="<?php echo e(asset('images/icon_active.gif')); ?>" alt="Deactivate Vehicle Class" title="Deactivate Vehicle Class" width="10" height="10" border="0" /></button>
                                 <?php else: ?>
-                                <button type="submit" name="deactivate" value="true"><img src="<?php echo e(asset('images/icon_close.gif')); ?>" alt="Activate Vehicle Class" title="Activate Vehicle Class" width="10" height="10" border="0" /></button>
+                                <button type="submit" name="status_change" value="true"><img src="<?php echo e(asset('images/icon_close.gif')); ?>" alt="Activate Vehicle Class" title="Activate Vehicle Class" width="10" height="10" border="0" /></button>
                                 <?php endif; ?>
                             </td>
                         </tr>

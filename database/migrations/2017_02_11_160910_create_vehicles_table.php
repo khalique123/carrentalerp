@@ -16,7 +16,8 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('reg_number', 12)->unique();
+            $table->string('reg_number', 20)->unique();
+            $table->string('vehicle_code', 50)->nullable();
             $table->string('chassis_number', 20)->unique()->nullable();
             $table->string('engine_number', 50)->unique()->nullable();
             $table->string('make', 20)->nullable();
@@ -32,6 +33,11 @@ class CreateVehiclesTable extends Migration
             $table->string('vehicle_location', 150)->nullable();
             $table->integer('branch_id')->unsigned();
             $table->integer('vehicle_status_id')->unsigned();
+            $table->tinyInt('passenger_capacity')->unsigned()->nullable();
+            $table->tinyInt('baggage_capacity')->unsigned()->nullable();
+            $table->tinyInt('number_of_doors')->unsigned()->nullable();
+            $table->boolean('is_air_conditioned')->nullable();
+            $table->integer('display_order');
             $table->softDeletes();
             $table->timestamps();
         });

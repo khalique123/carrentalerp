@@ -34,5 +34,3 @@
                 <tr>
                   <td width="2%">&nbsp;</td>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-                  </body>
-              </html>

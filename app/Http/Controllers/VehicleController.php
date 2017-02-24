@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Season;
+use App\Vehicle;
+use App\Branch;
+use App\VehicleClass;
+use App\Availability;
+use App\Fuel;
+use App\Transmission;
 use Validator;
 use Illuminate\Support\Facades\Input;
 
-class SeasonController extends Controller {
+class VehicleController extends Controller {
 
     /**
      * only when logged in
@@ -28,7 +33,7 @@ class SeasonController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id' => 'exists:seasons,id',
+            'id' => 'exists:vehicles,id',
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -37,21 +42,8 @@ class SeasonController extends Controller {
             return back();
         }
 
-        //this is meant to handle only one request at a time not both
-        if ($request->has('delete') && $request->has('status_change')) {
-            return back();
-        } else if ($request->has('delete')) {
-            return SeasonController::destroy($request->id);
-            return back();
-        } else if ($request->has('status_change')) {
-            $season= Season::find($request->id);
-            if(0 === strcasecmp($request->status_change, 'false')) {
-                $season->is_active = FALSE;
-            }
-            else if(0 === strcasecmp($request->status_change, 'true')) {
-                $season->is_active = TRUE;
-            }
-            $season->save();
+        if ($request->has('delete')) {
+            VehicleController::destroy($request->id);
             return back();
         }
     }
@@ -62,8 +54,11 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $seasons = Season::all();
-        return view('/rental/seasons/listing', ['seasons' => $seasons]);
+        $vehicles = Vehicle::all();
+        $vehicleClasses = VehicleClass::all();
+        $availabilities = Availability::all();
+        return view('/vehicle/listing', ['vehicles' => $vehicles, 'vehicle_classes' => $vehicleClasses, 
+            'availabilities' => $availabilities]);
     }
 
     /**
@@ -72,7 +67,15 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('/rental/seasons/create');
+        $existingVehicles = Vehicle::select('id', 'vehicle_code')->get();
+        $branches = Branch::select('id', 'name')->get();
+        $vehicleClasses = VehicleClass::select('id', 'name')->get();
+        $transmissions = Transmission::select('id', 'name')->get();
+        $fuels = Fuel::select('id', 'name')->get();
+        $availabilities = Availability::select('id', 'name')->get();
+        
+        return view('/vehicle/create_step1', ['existing_vehicles' => $existingVehicles, 'branches' => $branches, 
+            'vehicle_classes' => $vehicleClasses, 'transmissions' => $transmissions, 'fuels' => $fuels, 'availabilities' => $availabilities]);
     }
 
     /**
@@ -85,11 +88,17 @@ class SeasonController extends Controller {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'season_name' => 'required',
-            'season_desc' => 'required',
-            'disp_order'  => 'required',
-            'start_date'  => 'date|before_or_equal:end_date',
-            'end_date'    => 'date|after_or_equal:start_date',
+            'code' => 'required',
+            'reg' => 'required',
+            'vin'  => 'required',
+            'make'  => 'date|before_or_equal:end_date',
+            'model'    => 'date|after_or_equal:start_date',
+            'year'    => 'date|after_or_equal:start_date',
+            'color'    => 'date|after_or_equal:start_date',
+            'people'    => 'date|after_or_equal:start_date',
+            'baggage'    => 'date|after_or_equal:start_date',
+            'doors'    => 'date|after_or_equal:start_date',
+            'model'    => 'date|after_or_equal:start_date',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -101,17 +110,17 @@ class SeasonController extends Controller {
         } else {
             DB::transaction(function () use ($request) {
                 // store
-                $season = new Season;
-                $season->name           = Input::get('season_name');
-                $season->description    = Input::get('season_desc');
-                $season->display_order  = Input::get('disp_order');
-                $season->start_date     = Input::get('start_date');
-                $season->end_date       = Input::get('end_date');
-                $season->is_active      = FALSE;
+                $vehicle = new Season;
+                $vehicle->name           = Input::get('season_name');
+                $vehicle->description    = Input::get('season_desc');
+                $vehicle->display_order  = Input::get('disp_order');
+                $vehicle->start_date     = Input::get('start_date');
+                $vehicle->end_date       = Input::get('end_date');
+                $vehicle->is_active      = FALSE;
 
-                $season->save();
+                $vehicle->save();
             });
-            return redirect()->route('season_list_route');
+            return redirect()->route('vehicle_list_route');
         }
     }
 
@@ -122,8 +131,8 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $season = Season::where('id', '=', $id)->first();
-        return view('/rental/seasons/show', ['season' => $season]);
+        $vehicle = Vehicle::where('id', '=', $id)->first();
+        return view('/vehicle/show', ['vehicle' => $vehicle]);
     }
 
     /**
@@ -133,8 +142,8 @@ class SeasonController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $season = Season::find($id);
-        return view('/rental/seasons/edit', ['season' => $season]);
+        $vehicle = Vehicle::find($id);
+        return view('/vehicle/edit', ['vehicle' => $vehicle]);
     }
 
     /**
@@ -164,16 +173,16 @@ class SeasonController extends Controller {
         } else {
             DB::transaction(function () use ($request, $id) {
                 // store
-                $season = Season::find($id);
-                $season->name           = Input::get('season_name');
-                $season->description    = Input::get('season_desc');
-                $season->display_order  = Input::get('disp_order');
-                $season->start_date     = Input::get('start_date');
-                $season->end_date       = Input::get('end_date');
+                $vehicle = Vehicle::find($id);
+                $vehicle->name           = Input::get('season_name');
+                $vehicle->description    = Input::get('season_desc');
+                $vehicle->display_order  = Input::get('disp_order');
+                $vehicle->start_date     = Input::get('start_date');
+                $vehicle->end_date       = Input::get('end_date');
 
-                $season->save();
+                $vehicle->save();
             });
-            return redirect()->route('season_list_route');
+            return redirect()->route('vehicle_list_route');
         }
     }
 
@@ -185,10 +194,9 @@ class SeasonController extends Controller {
      */
     public function destroy($id) {
         DB::transaction(function () use ($id) {
-            $season = Season::where('id', $id)->first();
-
-            $season->delete();
+            $vehicle = Vehicle::where('id', $id)->first();
+            $vehicle->delete();
         });
-        return redirect()->route('season_list_route');
+        return redirect()->route('vehicle_list_route');
     }
 }

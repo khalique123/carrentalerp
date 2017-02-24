@@ -58,8 +58,8 @@
                 <td bgcolor="#F4F4F4" style="padding:0px 20px; border:1px solid #e0e0e0;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                   
                 <tr>
-                    <td width="20%" align="left"><a href="manage_options.php"><img src="images/icon_manageoption.gif" alt="Manage Options" width="27" height="26" border="0" /></a></td>
-                    <td width="80%" class="index_link"><a href="manage_options.php">Rental Options</a></td>
+                    <td width="20%" align="left"><a href="<?php echo e(route('accessory_list_route')); ?>"><img src="images/icon_manageoption.gif" alt="Manage Options" width="27" height="26" border="0" /></a></td>
+                    <td width="80%" class="index_link"><a href="<?php echo e(route('accessory_list_route')); ?>">Rental Accessories</a></td>
                   </tr>
                  
 
@@ -68,8 +68,8 @@
 
                 <td bgcolor="#F4F4F4" style="padding:0px 20px; border:1px solid #e0e0e0;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                                  <tr>
-                    <td width="23%" align="left"><a href="manage_car.php"><img src="images/icon_managecar.gif" alt="Manage Vehicle" width="34" height="26" border="0" /></a></td>
-                    <td width="77%" class="index_link"><a href="manage_car.php">Manage Vehicles</a></td>
+                    <td width="23%" align="left"><a href="<?php echo e(route('vehicle_list_route')); ?>"><img src="images/icon_managecar.gif" alt="Manage Vehicle" width="34" height="26" border="0" /></a></td>
+                    <td width="77%" class="index_link"><a href="<?php echo e(route('vehicle_list_route')); ?>">Manage Vehicles</a></td>
                   </tr>
                     
                 </table></td>

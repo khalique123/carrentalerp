@@ -1,5 +1,5 @@
-@include('header') 
-@include('leftpanel')
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td valign="top" class="txt_1"  align="center">
-                <form  method="POST" enctype="multipart/form-data" action="{{route('vehicle_insert_route')}}" onsubmit="return check_car_step1();"  style="padding-left:5px;">
+                <form  method="POST" enctype="multipart/form-data" action="<?php echo e(route('vehicle_insert_route')); ?>" onsubmit="return check_car_step1();"  style="padding-left:5px;">
                     <table width="100%" cellpadding="2" cellspacing="4" bgcolor="#f3f3f3">
                         <tr>
                             <td colspan="3" style="padding-left:70px;">&nbsp;</td>
@@ -44,9 +44,9 @@
                             <td width="54%">
                                 <select name="ajax_car_id" id="ajax_car_id">
                                     <option value="0" selected="selected">Select A Vehicle</option>
-                                    @foreach($existing_vehicles as $existingVehicle)
-                                    <option value="{{$existingVehicle->id}}"><>{{$existingVehicle->code}}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $existing_vehicles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $existingVehicle): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($existingVehicle->id); ?>"><><?php echo e($existingVehicle->code); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </td>
                             <td>&nbsp;</td>
@@ -75,9 +75,9 @@
                                             <td>
                                                 <select name="veh_loc" id="veh_loc" ">
                                                     <option value="0">Select A Location</option>
-                                                    @foreach($branches as $branch)
-                                                    <option value="{{$branch->id}}">{{$branch->name}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($branch->id); ?>"><?php echo e($branch->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
                                             <td>&nbsp;</td>
@@ -209,9 +209,9 @@
                                             <td>
                                                 <select name="class" id="class" onchange="check_ques_mark();">
                                                     <option value="0">Select A Class</option>
-                                                    @foreach($vehicle_classes as $vehicleClass)
-                                                    <option value="{{$vehicleClass->id}}">{{$vehicleClass->name}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $vehicle_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicleClass): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($vehicleClass->id); ?>"><?php echo e($vehicleClass->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
                                             <td>&nbsp;</td>
@@ -234,9 +234,9 @@
                                             <td>
                                                 <select name="transmission" id="transmission" style="width:145px;">
                                                     <option value="0">Select Transmission</option>
-                                                    @foreach($transmissions as $transmission)
-                                                    <option value="{{$transmission->id}}">{{$vehicleClass->name}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $transmissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transmission): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($transmission->id); ?>"><?php echo e($vehicleClass->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
                                             <td>&nbsp;</td>
@@ -259,9 +259,9 @@
                                             <td>
                                                 <select name="power_type" id="power_type">
                                                     <option value="0">Select Power Type</option>
-                                                    @foreach($fuels as $fuel)
-                                                    <option value="{{$fuel->id}}">{{$fuel->id}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $fuels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fuel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($fuel->id); ?>"><?php echo e($fuel->id); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
                                             <td>&nbsp;</td>
@@ -274,8 +274,8 @@
                                             <td>
                                                 <select name="availability" id="availability">
                                                     <option value="0">Select Availability</option>
-                                                    @foreach($availabilities as $availability)
-                                                    <option value="{{$availability->id}}">{{$availability->name}}</option>
+                                                    <?php $__currentLoopData = $availabilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $availability): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($availability->id); ?>"><?php echo e($availability->name); ?></option>
                                                 </select>
                                             </td>
                                             <td>&nbsp;</td>
@@ -360,7 +360,7 @@
 </table>
 </td>
 </tr>
-    @include('footer')
+    <?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </table>
 </table>
 
