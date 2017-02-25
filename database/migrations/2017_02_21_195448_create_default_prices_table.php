@@ -19,7 +19,7 @@ class CreateDefaultPricesTable extends Migration
             $table->morphs('priceable');
             $table->integer('pricing_type_id')->unsigned();
             $table->float('rate', 10, 2);
-            $table->integer('pricing_season_id')->unsigned();
+            //$table->integer('pricing_season_id')->unsigned();
         });
     }
 

@@ -10,8 +10,8 @@ class Season extends Model
     /**
      * Get  the  default prices associated with the season.
      */
-    public function defaultPrices()
-    {
-        return $this->hasMany('App\DefaultPrice', 'pricing_season_id', 'id');
+    public function prices()
+   
+        return $this->morphMany('App\DefaultPrice', 'priceable');
     }
 }

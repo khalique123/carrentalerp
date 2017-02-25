@@ -15,7 +15,7 @@ class ForeignDeaultPricesTable extends Migration
     {
         Schema::table('default_prices', function (Blueprint $table) {
             $table->foreign('pricing_type_id')->references('id')->on('pricing_types');
-            $table->foreign('pricing_season_id')->references('id')->on('seasons');
+            //$table->foreign('pricing_season_id')->references('id')->on('seasons');
         });
     }
 
@@ -28,7 +28,7 @@ class ForeignDeaultPricesTable extends Migration
     {
         Schema::table('default_prices', function (Blueprint $table) {
             $table->dropForeign(['pricing_type_id']);
-            $table->dropForeign(['pricing_season_id']);
+            //$table->dropForeign(['pricing_season_id']);
         });
     }
 }

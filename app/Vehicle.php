@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
+    /**
+     * Get all of the vehicle prices.
+     */
+    public function prices()
+    {
+        return $this->morphMany('App\DefaultPrice', 'priceable');
+    }
     
     /**
      * Get the vehicle class associated with the vehicle.
