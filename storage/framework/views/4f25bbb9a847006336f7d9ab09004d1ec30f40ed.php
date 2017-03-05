@@ -1,12 +1,12 @@
-@include('header')
-{{--@include('leftpanel')--}}
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td class="heading_1" style="padding:5px;">
-                Add
+                Edit
                 Rental Seasons
             </td>
         </tr>
@@ -15,8 +15,11 @@
         </tr>
         <tr>
             <td valign="top" class="txt_1"  align="center">
-                <form  method="POST" action="{{route('season_insert_route')}}" onsubmit="return check_season();"  style="padding-left:5px;">
-                    {{csrf_field()}}
+                <form  method="POST" action="<?php echo e(route('season_update_route', ['id' => $season->id])); ?>" onsubmit="return check_season();"  style="padding-left:5px;">
+                    <?php echo e(csrf_field()); ?>
+
+                    <?php echo e(method_field('PUT')); ?>
+
                     <table width="100%" cellpadding="2" cellspacing="4" class="tab-border" bgcolor="#f3f3f3">
                         <tr><td colspan="3" style="padding-left:70px;">
                                 Fields marked with ' <span style="color:#8e2020; font-size:15px;">*</span> ' are mandatory.
@@ -25,35 +28,33 @@
 
                         <tr>
                             <td class="txt_1" style="text-align:right;"><b>Season Name : <span style="color:#8e2020; font-size:15px;">*</span></b></td>
-                            <td><input type="text" name="season_name" id="season_name" class="txtbox" value="" /></td>
+                            <td><input type="text" name="season_name" id="season_name" class="txtbox" value="<?php echo e($season->name); ?>" /></td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td valign="top" class="txt_1" style="text-align:right;"><b>Season Description : <span style="color:#8e2020; font-size:15px;">*</span></b></td>
                             <td>
-                                <textarea rows="5" cols="15" name="season_desc" id="season_desc"></textarea>
+                                <textarea rows="5" cols="15" name="season_desc" id="season_desc"><?php echo e($season->description); ?></textarea>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="txt_1" style="text-align:right;"><b>Start Date : <span style="color:#8e2020; font-size:15px;">*</span></b></td>
                             <td>
-                                <input type="date" name="start_date" id="start_date" value="">
+                                <input type="date" name="start_date" id="start_date" value="<?php echo e($season->start_date); ?>">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="txt_1" style="text-align:right;"><b>End Date : <span style="color:#8e2020; font-size:15px;">*</span></b></td>
                             <td>
-                                <input type="date" name="end_date" id="end_date" value="">
+                                <input type="date" name="end_date" id="end_date" value="<?php echo e($season->end_date); ?>">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="txt_1" style="text-align:right;"><b>Display Order : <span style="color:#8e2020; font-size:15px;">*</span></b></td>
-                            <td><input type="text" name="disp_order" id="disp_order" class="txtbox" value="" /></td>
-
-                            <td><input type="hidden" name="season_id" value="" /> </td>
+                            <td><input type="text" name="disp_order" id="disp_order" class="txtbox" value="<?php echo e($season->display_order); ?>" /></td>
                         </tr>
                         <tr>
                             <td>
@@ -61,7 +62,7 @@
                             </td>
 
                             <td>
-                                <input type="submit" name="add_season" value="Add" class="btn_1" />
+                                <input type="submit" name="add_season" value="Edit" class="btn_1" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -79,7 +80,7 @@
 </tr>
 </table></td>
 </tr>
-@include('footer')
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </table>
 
 </table>

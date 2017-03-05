@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/test', function() {
 
-    return view('test', ['branch' => Branch::where('id', '=', 1)->first()]);
+    return view('/new/test');
 });
 Route::get('/home', 'HomeController@index');
 //Route to display change password page

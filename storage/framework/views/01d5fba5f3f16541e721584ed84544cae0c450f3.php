@@ -1,5 +1,5 @@
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:0px solid #FF9933;">
@@ -158,7 +158,7 @@
                                                                     <b>Availability:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="av-txt_c"><?php echo e($vehicle->availabilty['name']); ?></span>
+                                                                    <span class="av-txt_c"><?php echo e($vehicle->availabilty->name); ?></span>
                                                                 </td>
                                                             </tr>
                                                         </table>

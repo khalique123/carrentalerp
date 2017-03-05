@@ -1,5 +1,5 @@
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<?php echo $__env->make('leftpanel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+
 <td width="2%">&nbsp;</td>
         <td width="80%" valign="top">
 

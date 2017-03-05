@@ -85,12 +85,4 @@ class Vehicle extends Model
     {
         return $this->hasMany('App\Booking','vehicle_id', 'id');
     }
-    
-    /**
-     * Get all of the vehicle prices.
-     */
-    public function prices()
-    {
-        return $this->morphMany('App\DefaultPrice', 'priceable');
-    }
 }

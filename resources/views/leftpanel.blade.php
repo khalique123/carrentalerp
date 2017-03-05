@@ -1,7 +1,5 @@
 <td width="18%" valign="top">
                     <!-- Leftpanel Start -->
-                    <!-- Leftpanel Start -->
-                    <!-- Leftpanel Start -->
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td>

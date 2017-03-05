@@ -1,5 +1,5 @@
 @include('header')
-@include('leftpanel')
+{{--@include('leftpanel')--}}
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
 
