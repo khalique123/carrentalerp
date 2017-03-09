@@ -163,3 +163,27 @@ Route::put('accessory/{id}', 'RentalAccessoryController@update')
 Route::delete('accessory/{id}', 'RentalAccessoryController@destroy')
     ->where('id', '[0-9]+')
     ->name('accessory_delete_route');
+
+/*
+| Controller to control bookings
+*/
+Route::post('booking/form_submit', 'BookingController@processInputBasedRequest')
+    ->name('booking_decision_route');
+Route::get('booking', 'BookingController@index')
+    ->name('booking_list_route');
+Route::get('booking/create/{vehicle_id}/{from_date}/{to_date}', 'BookingController@create')
+    ->name('booking_create_route');
+Route::post('booking', 'BookingController@store')
+    ->name('booking_insert_route');
+Route::get('booking/{id}', 'BookingController@show')
+    ->where('id', '[0-9]+')
+    ->name('booking_show_route');
+Route::get('booking/{id}/edit', 'BookingController@edit')
+    ->where('id', '[0-9]+')
+    ->name('booking_edit_route');
+Route::put('booking/{id}', 'BookingController@update')
+    ->where('id', '[0-9]+')
+    ->name('booking_update_route');
+Route::delete('booking/{id}', 'BookingController@destroy')
+    ->where('id', '[0-9]+')
+    ->name('booking_delete_route');

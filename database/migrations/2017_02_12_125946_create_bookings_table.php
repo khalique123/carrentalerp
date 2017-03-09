@@ -16,6 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('title', 10);
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('company_name')->nullable();
@@ -32,6 +33,7 @@ class CreateBookingsTable extends Migration
             $table->date('booking_end_date');
             $table->string('passport_id', 50)->nullable();
             $table->integer('customer_group_id')->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

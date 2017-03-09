@@ -92,7 +92,11 @@
                                                 <select name="veh_loc" id="veh_loc" ">
                                                     <option value="0">Select A Location</option>
                                                     <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($branch->id); ?>"><?php echo e($branch->name); ?></option>
+                                                    <?php if(isset($vehicle) && $vehicle->branch_id == $branch->id): ?>
+                                                    <option value="<?php echo e($branch->id); ?>" selected="selected"><?php echo e($branch->name); ?></option>
+                                                    <?php else: ?>
+                                                    <option value="<?php echo e($branch->id); ?>" ><?php echo e($branch->name); ?></option>
+                                                    <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
@@ -111,7 +115,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="code" id="code" class="txtbox" value="" />
+                                                <input type="text" name="code" id="code" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->vehicle_code : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                         </tr>
@@ -121,7 +125,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="reg" id="reg" class="txtbox" value="" />
+                                                <input type="text" name="reg" id="reg" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->reg_number : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -138,7 +142,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="chassis" id="chassis" class="txtbox" value="" />
+                                                <input type="text" name="chassis" id="chassis" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->chassis_number : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -155,7 +159,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="engine" id="engine" class="txtbox" value="" />
+                                                <input type="text" name="engine" id="engine" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->engine_number : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -172,7 +176,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="vin" id="vin" class="txtbox" value="" />
+                                                <input type="text" name="vin" id="vin" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->vin : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -189,7 +193,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="make" id="make" class="txtbox" value="" />
+                                                <input type="text" name="make" id="make" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->make : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -206,7 +210,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="model" id="model" class="txtbox" value="" />
+                                                <input type="text" name="model" id="model" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->model : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -223,7 +227,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="year" id="year" class="txtbox" value="" />
+                                                <input type="text" name="year" id="year" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->manu_year : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -257,7 +261,7 @@
                                                 </b>
                                             </td>
                                             <td align="left">
-                                                <input type="text" name="people" id="people" class="txtbox" value="" />
+                                                <input type="text" name="people" id="people" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->passenger_capacity : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -274,7 +278,7 @@
                                                 </b>
                                             </td>
                                             <td align="left">
-                                                <input type="text" name="baggage" id="baggage" class="txtbox" value="" />
+                                                <input type="text" name="baggage" id="baggage" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->baggage_capacity : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -291,7 +295,7 @@
                                                 </b>
                                             </td>
                                             <td align="left">
-                                                <input type="text" name="doors" id="doors" class="txtbox" value="" />
+                                                <input type="text" name="doors" id="doors" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->number_of_doors : ''); ?>" />
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -307,7 +311,7 @@
                                                 <b>Air Conditioned :</b>
                                             </td>
                                             <td align="left">
-                                                <input  type="checkbox" name="ac" id="ac" />
+                                                <input  type="checkbox" name="ac" id="ac" <?php echo e((isset($vehicle) && $vehicle->is_air_conditioned) ? 'checked="checked"' : ''); ?>/>
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -327,7 +331,11 @@
                                                 <select name="class" id="class" onchange="check_ques_mark();">
                                                     <option value="0">Select A Class</option>
                                                     <?php $__currentLoopData = $vehicle_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicleClass): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if(isset($vehicle) && $vehicle->vehicle_class_id == $vehicleClass->id): ?>
+                                                    <option value="<?php echo e($vehicleClass->id); ?>" selected="selected"><?php echo e($vehicleClass->name); ?></option>
+                                                    <?php else: ?>
                                                     <option value="<?php echo e($vehicleClass->id); ?>"><?php echo e($vehicleClass->name); ?></option>
+                                                    <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
@@ -345,7 +353,7 @@
                                                 <b>Maximum Weight : &nbsp;&nbsp;</b>
                                             </td>
                                             <td>
-                                                <input type="text" name="weight" id="weight" class="txtbox" value="" />
+                                                <input type="text" name="weight" id="weight" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->weight : ''); ?>" />
                                                 <b>&nbsp;Kg.</b>
                                             </td>
                                             <td>&nbsp;</td>
@@ -366,7 +374,11 @@
                                                 <select name="transmission" id="transmission" style="width:145px;">
                                                     <option value="0">Select Transmission</option>
                                                     <?php $__currentLoopData = $transmissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transmission): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if(isset($vehicle) && $vehicle->transmission_id == $transmission->id): ?>
+                                                    <option value="<?php echo e($transmission->id); ?>" selected="selected"><?php echo e($transmission->name); ?></option>
+                                                    <?php else: ?>
                                                     <option value="<?php echo e($transmission->id); ?>"><?php echo e($transmission->name); ?></option>
+                                                    <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
@@ -385,7 +397,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <textarea rows="3" cols="15" name="desc" id="desc"></textarea>
+                                                <textarea rows="3" cols="15" name="desc" id="desc"><?php echo e(isset($vehicle) ? $vehicle->description : ''); ?></textarea>
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>
@@ -405,7 +417,11 @@
                                                 <select name="fuel_type" id="fuel_type">
                                                     <option value="0">Select Fuel Type</option>
                                                     <?php $__currentLoopData = $fuels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fuel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if(isset($vehicle) && $vehicle->fuel_id == $fuel->id): ?>
+                                                    <option value="<?php echo e($fuel->id); ?>" selected="selected"><?php echo e($fuel->name); ?></option>
+                                                    <?php else: ?>
                                                     <option value="<?php echo e($fuel->id); ?>"><?php echo e($fuel->name); ?></option>
+                                                    <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
@@ -427,7 +443,11 @@
                                                 <select name="availability" id="availability">
                                                     <option value="0">Select Availability</option>
                                                     <?php $__currentLoopData = $availabilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $availability): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if(isset($vehicle) && $vehicle->availability_id == $availability->id): ?>
+                                                    <option value="<?php echo e($availability->id); ?>" selected="selected"><?php echo e($availability->name); ?></option>
+                                                    <?php else: ?>
                                                     <option value="<?php echo e($availability->id); ?>"><?php echo e($availability->name); ?></option>
+                                                    <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
@@ -498,7 +518,7 @@
                                                 </b>
                                             </td>
                                             <td>
-                                                <input type="text" name="disp_order" id="disp_order" class="txtbox" value="" />
+                                                <input type="text" name="disp_order" id="disp_order" class="txtbox" value="<?php echo e(isset($vehicle) ? $vehicle->display_order : ''); ?>" />
                                             </td>
                                             <td>
                                                 <?php if($errors->has('disp_order')): ?>
@@ -508,7 +528,7 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <input type="hidden" name="ID" value="" />
+                                                <input type="hidden" name="ID" value="<?php echo e(isset($vehicle) ? $vehicle->id : ''); ?>" />
                                             </td>
                                         </tr>
                                     </table>

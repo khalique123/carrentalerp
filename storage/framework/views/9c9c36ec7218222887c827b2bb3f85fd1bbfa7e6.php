@@ -1,5 +1,5 @@
-@include('header') 
-{{--@include('leftpanel')--}}
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+
 
 <td width="2%">&nbsp;</td>
 <td width="80%" valign="top">
@@ -52,52 +52,52 @@
                                     </td>
                                     <td width="82%" class="con-txt-5" valign="top">
                                         <b>Description :</b>
-                                        <br />{{$vehicle->description}}</td>
+                                        <br /><?php echo e($vehicle->description); ?></td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
                         <td width="15%" bgcolor="#e0e9ed" class="con-txt-4">Code  :</td>
-                        <td width="26%" bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->code}}</td>
+                        <td width="26%" bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->code); ?></td>
                         <td width="18%" bgcolor="#E0E9ED" class="con-txt-4">Class :</td>
-                        <td width="41%" bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->vehicle_class['name']}}</td>
+                        <td width="41%" bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->vehicle_class['name']); ?></td>
                     </tr>
                     <tr>
                         <td bgcolor="#e0e9ed" class="con-txt-4">Reg. No  :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->reg_number}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->reg_number); ?></td>
                         <td bgcolor="#E0E9ED" class="con-txt-4">Maximum Weight :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->weight}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->weight); ?></td>
                     </tr>
                     <tr>
                         <td bgcolor="#e0e9ed" class="con-txt-4"> VIN :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->vin}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->vin); ?></td>
                         <td bgcolor="#E0E9ED" class="con-txt-4">Transmission :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->transmission['name']}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->transmission['name']); ?></td>
                     </tr>
                     <tr>
                         <td bgcolor="#e0e9ed" class="con-txt-4">Make :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->make}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->make); ?></td>
                         <td bgcolor="#E0E9ED" class="con-txt-4">Engine :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->engine_number}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->engine_number); ?></td>
                     </tr>
                     <tr>
                         <td bgcolor="#e0e9ed" class="con-txt-4">Model :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->model}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->model); ?></td>
                         <td bgcolor="#E0E9ED" class="con-txt-4">Fuel Type :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->fuel['name']}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->fuel['name']); ?></td>
                     </tr>
                     <tr>
                         <td bgcolor="#e0e9ed" class="con-txt-4">Year :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->manu_year}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->manu_year); ?></td>
                         <td bgcolor="#E0E9ED" class="con-txt-4"></td>
                         <td bgcolor="#f3f3f3" class="con-txt-5"></td>
                     </tr>
                     <tr>
                         <td bgcolor="#e0e9ed" class="con-txt-4">Color :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->color}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->color); ?></td>
                         <td bgcolor="#E0E9ED" class="con-txt-4">Availability :</td>
-                        <td bgcolor="#f3f3f3" class="con-txt-5">{{$vehicle->availability['name']}}</td>
+                        <td bgcolor="#f3f3f3" class="con-txt-5"><?php echo e($vehicle->availability['name']); ?></td>
                     </tr>
                 </table>
                 <!-- Car Details End -->
@@ -330,7 +330,7 @@
 </table>
 </td>
 </tr>
-@include('footer')
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </table>
 
 </table>

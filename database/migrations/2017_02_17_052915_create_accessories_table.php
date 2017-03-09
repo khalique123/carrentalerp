@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRentalAccessoriesTable extends Migration
+class CreateAccessoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRentalAccessoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rental_accessories', function (Blueprint $table) {
+        Schema::create('accessories', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('code', 50)->unique();
@@ -32,6 +32,6 @@ class CreateRentalAccessoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rental_accessories');
+        Schema::dropIfExists('accessories');
     }
 }

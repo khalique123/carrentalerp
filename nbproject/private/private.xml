@@ -7,8 +7,10 @@
             <file>file:/F:/required_tools/wamp64/www/cars/app/DefaultPrice.php</file>
             <file>file:/F:/required_tools/wamp64/www/cars/app/Http/Controllers/VehicleClassController.php</file>
             <file>file:/F:/required_tools/wamp64/www/cars/resources/views/vehicle/class/create.blade.php</file>
+            <file>file:/F:/required_tools/wamp64/www/cars/app/Http/Controllers/VehicleController.php</file>
             <file>file:/F:/required_tools/wamp64/www/cars/routes/web.php</file>
             <file>file:/F:/required_tools/wamp64/www/cars/app/VehicleClass.php</file>
+            <file>file:/F:/required_tools/wamp64/www/cars/resources/views/vehicle/listing.blade.php</file>
         </group>
     </open-files>
 </project-private>

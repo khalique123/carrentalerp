@@ -43,7 +43,7 @@ class Vehicle extends Model
      */
     public function availability()
     {
-        return $this->belongsTo('App\Availability', 'availability_id');
+        return $this->belongsTo('App\Availability', 'availability_id', 'id');
     }
     
     /**

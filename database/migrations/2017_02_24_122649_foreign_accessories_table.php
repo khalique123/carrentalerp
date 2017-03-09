@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ForeignRentalAccessoriesTable extends Migration
+class ForeignAccessoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ForeignRentalAccessoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('rental_accessories', function (Blueprint $table) {
+        Schema::table('accessories', function (Blueprint $table) {
             $table->foreign('pricing_type_id')->references('id')->on('pricing_types');
             $table->foreign('currency_id')->references('id')->on('currencies');
         });
@@ -26,7 +26,7 @@ class ForeignRentalAccessoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('rental_accessories', function (Blueprint $table) {
+        Schema::table('accessories', function (Blueprint $table) {
             //
         });
     }

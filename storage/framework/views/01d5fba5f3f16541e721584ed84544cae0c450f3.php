@@ -13,11 +13,11 @@
         </tr>
         <tr>
             <tr height="10"/>
-            <td   style="padding-left:6px;" align="left" class="av-txt"> Available in fleet: <span align="left" class="av-txt_c">10</span>
+            <td   style="padding-left:6px;" align="left" class="av-txt"> Available in fleet: <span align="left" class="av-txt_c"><?php echo e($num_available); ?></span>
             </td>
-            <td  style="padding-left:6px;" align="left" class="av-txt">Vehicles in Maintenance: <span align="left" class="av-txt_c">2</span>
+            <td  style="padding-left:6px;" align="left" class="av-txt">Vehicles in Maintenance: <span align="left" class="av-txt_c"><?php echo e($num_maintenance); ?></span>
             </td>
-            <td colspan="2" style="padding-left:6px;" align="left" class="av-txt">Vehicles in Accident: <span align="left" class="av-txt_c">0</span>
+            <td colspan="2" style="padding-left:6px;" align="left" class="av-txt">Vehicles in Accident: <span align="left" class="av-txt_c"><?php echo e($num_accident); ?></span>
             </td>
         </tr>
         <tr>
@@ -25,19 +25,18 @@
         </tr>
         <tr class="lp_title1">
             <td colspan="4" style="padding:5px; ">
-                <form name="sfrm" id="sfrm" style="margin:0px;" action="manage_car.php" method="post">
+                <form name="listing_form" id="sfrm" style="margin:0px;" action="<?php echo e(route('vehicle_decision_route')); ?>" method="post">
+                    <?php echo e(csrf_field()); ?>
+
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td  width="5%" class="con-txt-3">Class :</td>
                             <td width="10%" align="left">
                                 <select name="car_class" id="car_class" style="width:160px;">
                                     <option value="0">Select Class</option>
-                                    <option  value="1">Economy</option>
-                                    <option  value="2">Luxury</option>
-                                    <option  value="3">Compact</option>
-                                    <option  value="4">Convertible</option>
-                                    <option  value="5">Pickup</option>
-                                    <option  value="9">SUV</option>
+                                    <?php $__currentLoopData = $vehicle_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicleClass): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option  value="<?php echo e($vehicleClass->id); ?>"><?php echo e($vehicleClass->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </td>
                             <td align="right" width="6%" class="con-txt-3">Make :</td>
@@ -49,10 +48,10 @@
                                 <input type="text" name="model" id="model" value=""/>
                             </td>
                             <td align="center" rowspan="2" width="10%">
-                                <input name="button" type="button" class="btn_2" style="border:1px solid #ffffff;" value="GO" onclick="javascript:chk_search();" />
+                                <button name="buttonFilterVehicles" type="submit" class="btn_2" style="border:1px solid #ffffff;" value="GO">GO</button>
                             </td>
                             <td rowspan="2" width="10%">
-                                <input name="button2" type="button" style="border:1px solid #ffffff;" class="btn_2" value="Show All" onclick="javascript:show_all();" />
+                                <button name="buttonAllVehicles" type="submit" style="border:1px solid #ffffff;" class="btn_2" value="Show All">Show All</button>
                             </td>
                         </tr>
                         <tr>
@@ -60,13 +59,9 @@
                             <td width="10%" align="left">
                                 <select name="car_av" id="car_av" style="width:160px;">
                                     <option value="0">Select Availability</option>
-                                    <option  value="1">Available</option>
-                                    <option  value="2">Maintenance</option>
-                                    <option  value="3">Accident</option>
-                                    <option  value="4">Sold</option>
-                                    <option  value="5">Pending Sale</option>
-                                    <option  value="6">List on Site for Sale</option>
-                                    <option  value="7">Disposed</option>
+                                    <?php $__currentLoopData = $availabilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $availability): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option  value="<?php echo e($availability->id); ?>"><?php echo e($availability->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <td  align="right" class="con-txt-3">Color :</td>
                                 <td  align="center">
@@ -91,7 +86,7 @@
                 <td colspan="4">
                     <table width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td  style="padding-left:6px;" align="left" class="av-txt">Vehicles Selected: <span align="left" class="av-txt_c">12</span>
+                            <td  style="padding-left:6px;" align="left" class="av-txt">Vehicles Selected: <span align="left" class="av-txt_c"><?php echo e($vehicles->count()); ?></span>
                             </td>
                             <td align="right" bgcolor="#FFFFFF" style="padding:3px;">
                                 <div class="page-txt">
@@ -158,7 +153,7 @@
                                                                     <b>Availability:</b>
                                                                 </td>
                                                                 <td>
-                                                                    <span class="av-txt_c"><?php echo e($vehicle->availabilty->name); ?></span>
+                                                                    <span class="av-txt_c"><?php echo e($vehicle->availability['name']); ?></span>
                                                                 </td>
                                                             </tr>
                                                         </table>

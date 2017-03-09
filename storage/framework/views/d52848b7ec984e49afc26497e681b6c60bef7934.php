@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="<?php echo e(config('app.locale')); ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,6 +65,7 @@
         </style>
     </head>
     <body>
-    {{$vehicle_info}}
+    <?php echo e($vehicle_info); ?>
+
     </body>
 </html>
